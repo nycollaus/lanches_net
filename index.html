@@ -32,12 +32,14 @@
         }
 
         .logo h1 {
-            font-size: 2em;
-            background: linear-gradient(45deg, #ff9f43, #ff6b6b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
-        }
+    font-size: 2em;
+    background: linear-gradient(45deg, #ff9f43, #ff6b6b);
+    background-clip: text; /* Propriedade padrão */
+    -webkit-background-clip: text; /* Prefixo para compatibilidade com navegadores WebKit */
+    color: transparent; /* Propriedade padrão */
+    -webkit-text-fill-color: transparent; /* Prefixo para compatibilidade com navegadores WebKit */
+    margin-bottom: 5px;
+}
 
         .logo p {
             font-size: 0.9em;
@@ -118,6 +120,20 @@
 
         .produto:hover {
             transform: translateY(-5px);
+        }
+
+        .produto-imagem {
+            width: 100%;
+            height: 150px;
+            overflow: hidden;
+            border-radius: 10px 10px 0 0;
+            margin-bottom: 10px;
+        }
+
+        .produto-imagem img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .produto h3 {
@@ -299,24 +315,36 @@
             <h2>🍔 Hambúrgueres</h2>
             <div class="produtos">
                 <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="https://exemplo.com/imagens/x-tudo.jpg" alt="X-Tudo">
+                    </div>
                     <h3>X-Tudo</h3>
                     <p>Ingredientes: Pão, carne, alface, ovo, molhos, passas, queijo ralado, milho, cheddar.</p>
                     <p>Preço: R$14,90</p>
                     <button onclick="addToCart('HB01', 'X-Tudo', 14.90)">Adicionar</button>
                 </article>
                 <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="https://exemplo.com/imagens/x-salada.jpg" alt="X-Salada">
+                    </div>
                     <h3>X-Salada</h3>
                     <p>Ingredientes: Pão, salada, carne, milho, ovo, molho, azeitona.</p>
                     <p>Preço: R$13,90</p>
                     <button onclick="addToCart('HB02', 'X-Salada', 13.90)">Adicionar</button>
                 </article>
                 <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="https://exemplo.com/imagens/x-bacon.jpg" alt="X-Bacon">
+                    </div>
                     <h3>X-Bacon</h3>
                     <p>Ingredientes: Pão, carne, bacon/linguiça, molho, alface, tomate, cheddar.</p>
                     <p>Preço: R$15,00</p>
                     <button onclick="addToCart('HB03', 'X-Bacon', 15.00)">Adicionar</button>
                 </article>
                 <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="https://exemplo.com/imagens/hamburguer-simples.jpg" alt="Hambúrguer Simples">
+                    </div>
                     <h3>Hambúrguer Simples</h3>
                     <p>Ingredientes: Pão, carne, cheddar, salada, ovo, molhos.</p>
                     <p>Preço: R$8,50</p>
@@ -330,26 +358,41 @@
             <h2>🍕 Pizzas</h2>
             <div class="produtos">
                 <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="https://exemplo.com/imagens/calabresa.jpg" alt="Calabresa">
+                    </div>
                     <h3>Calabresa</h3>
                     <p>Preço: R$50,90</p>
                     <button onclick="addToCart('PZ01', 'Pizza Calabresa', 50.90)">Adicionar</button>
                 </article>
                 <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="https://exemplo.com/imagens/frango-catupiry.jpg" alt="Frango + Catupiry">
+                    </div>
                     <h3>Frango + Catupiry</h3>
                     <p>Preço: R$65,50</p>
                     <button onclick="addToCart('PZ02', 'Pizza Frango + Catupiry', 65.50)">Adicionar</button>
                 </article>
                 <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="https://exemplo.com/imagens/marguerita.jpg" alt="Marguerita">
+                    </div>
                     <h3>Marguerita</h3>
                     <p>Preço: R$56,90</p>
                     <button onclick="addToCart('PZ03', 'Pizza Marguerita', 56.90)">Adicionar</button>
                 </article>
                 <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="https://exemplo.com/imagens/mucarela.jpg" alt="Muçarela">
+                    </div>
                     <h3>Muçarela</h3>
                     <p>Preço: R$50,00</p>
                     <button onclick="addToCart('PZ04', 'Pizza Muçarela', 50.00)">Adicionar</button>
                 </article>
                 <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="https://exemplo.com/imagens/4-queijos.jpg" alt="4 Queijos">
+                    </div>
                     <h3>4 Queijos</h3>
                     <p>Preço: R$85,00</p>
                     <button onclick="addToCart('PZ05', 'Pizza 4 Queijos', 85.00)">Adicionar</button>
@@ -362,16 +405,25 @@
             <h2>😋 Pastéis</h2>
             <div class="produtos">
                 <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="https://exemplo.com/imagens/pastel-carne.jpg" alt="Carne">
+                    </div>
                     <h3>Carne</h3>
                     <p>Preço: R$12,00</p>
                     <button onclick="addToCart('PT01', 'Pastel de Carne', 12.00)">Adicionar</button>
                 </article>
                 <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="https://exemplo.com/imagens/pastel-carne-milho.jpg" alt="Carne + Milho">
+                    </div>
                     <h3>Carne + Milho</h3>
                     <p>Preço: R$14,00</p>
                     <button onclick="addToCart('PT02', 'Pastel Carne + Milho', 14.00)">Adicionar</button>
                 </article>
                 <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="https://exemplo.com/imagens/pastel-queijo-presunto.jpg" alt="Queijo + Presunto">
+                    </div>
                     <h3>Queijo + Presunto</h3>
                     <p>Preço: R$16,00</p>
                     <button onclick="addToCart('PT03', 'Pastel Queijo + Presunto', 16.00)">Adicionar</button>
@@ -384,31 +436,49 @@
             <h2>🍟 Batata Frita</h2>
             <div class="produtos">
                 <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="https://exemplo.com/imagens/batata-linguiça.jpg" alt="Batata + Linguiça">
+                    </div>
                     <h3>Batata + Linguiça</h3>
                     <p>Escolha o tamanho:</p>
                     <button class="selecionar-peso" onclick="abrirModal('BT01', 'Batata + Linguiça', 15.50, 25.00)">Selecionar Peso</button>
                 </article>
                 <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="https://exemplo.com/imagens/batata-queijo-linguiça.jpg" alt="Batata + Queijo/Linguiça">
+                    </div>
                     <h3>Batata + Queijo/Linguiça</h3>
                     <p>Escolha o tamanho:</p>
                     <button class="selecionar-peso" onclick="abrirModal('BT02', 'Batata + Queijo/Linguiça', 15.00, 35.00)">Selecionar Peso</button>
                 </article>
                 <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="https://exemplo.com/imagens/batata-bacon-linguiça.jpg" alt="Batata + Bacon/Linguiça">
+                    </div>
                     <h3>Batata + Bacon/Linguiça</h3>
                     <p>Escolha o tamanho:</p>
                     <button class="selecionar-peso" onclick="abrirModal('BT03', 'Batata + Bacon/Linguiça', 16.90, 28.50)">Selecionar Peso</button>
                 </article>
                 <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="https://exemplo.com/imagens/batata-cheddar-bacon.jpg" alt="Batata + Cheddar/Bacon">
+                    </div>
                     <h3>Batata + Cheddar/Bacon</h3>
                     <p>Escolha o tamanho:</p>
                     <button class="selecionar-peso" onclick="abrirModal('BT04', 'Batata + Cheddar/Bacon', 25.50, 35.90)">Selecionar Peso</button>
                 </article>
                 <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="https://exemplo.com/imagens/batata-frango.jpg" alt="Batata + Frango">
+                    </div>
                     <h3>Batata + Frango</h3>
                     <p>Escolha o tamanho:</p>
                     <button class="selecionar-peso" onclick="abrirModal('BT05', 'Batata + Frango', 17.00, 21.00)">Selecionar Peso</button>
                 </article>
                 <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="https://exemplo.com/imagens/batata-alho.jpg" alt="Batata + Alho">
+                    </div>
                     <h3>Batata + Alho</h3>
                     <p>Escolha o tamanho:</p>
                     <button class="selecionar-peso" onclick="abrirModal('BT06', 'Batata + Alho', 12.00, 24.00)">Selecionar Peso</button>
@@ -421,16 +491,25 @@
             <h2>🥤 Refrigerantes</h2>
             <div class="produtos">
                 <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="https://exemplo.com/imagens/coca-cola.jpg" alt="Coca-Cola 500ml">
+                    </div>
                     <h3>Coca-Cola 500ml</h3>
                     <p>Preço: R$6,50</p>
                     <button onclick="addToCart('RF01', 'Coca-Cola 500ml', 6.50)">Adicionar</button>
                 </article>
                 <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="https://exemplo.com/imagens/guarana-antarctica.jpg" alt="Guaraná Antarctica">
+                    </div>
                     <h3>Guaraná Antarctica</h3>
                     <p>Preço: R$10,90</p>
                     <button onclick="addToCart('RF02', 'Guaraná Antarctica', 10.90)">Adicionar</button>
                 </article>
                 <article class="produto">
+                    <div class="produto-imagem">
+                        <img src="https://exemplo.com/imagens/guaracamp.jpg" alt="Guaracamp">
+                    </div>
                     <h3>Guaracamp</h3>
                     <p>Preço: R$4,50</p>
                     <button onclick="addToCart('RF03', 'Guaracamp', 4.50)">Adicionar</button>
@@ -709,3 +788,4 @@
         }
     </script>
 </body>
+</html>
