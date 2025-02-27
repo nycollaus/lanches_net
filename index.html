@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LanchesNet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(rgba(67, 40, 110, 0.95), rgba(67, 40, 110, 0.95)),
+                        url('https://wallpapers.com/images/high/full-moon-dark-purple-iphone-v0jd40kljbbf758t.webp');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo h1 {
+            font-size: 2em;
+            background: linear-gradient(45deg, #ff9f43, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+
+        .logo p {
+            font-size: 0.9em;
+            color: #ddd;
+        }
+
+        .categorias {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px 0;
+            margin-bottom: 15px;
+            scrollbar-width: thin;
+            scrollbar-color: #8e44ad rgba(255, 255, 255, 0.1);
+        }
+
+        .categorias::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .categorias::-webkit-scrollbar-thumb {
+            background: #8e44ad;
+            border-radius: 3px;
+        }
+
+        .categoria-btn {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+            color: #fff;
+        }
+
+        .categoria-btn.active {
+            background: #8e44ad;
+        }
+
+        .produtos-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .categoria-section {
+            margin-bottom: 20px;
+        }
+
+        .categoria-section h2 {
+            margin-bottom: 10px;
+            padding-left: 10px;
+            border-left: 4px solid #8e44ad;
+            font-size: 1.2em;
+            color: #ff6b6b;
+        }
+
+        .produtos {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .produtos {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .produto {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .produto:hover {
+            transform: translateY(-5px);
+        }
+
+        .produto h3 {
+            font-size: 1em;
+            margin-bottom: 5px;
+            color: #ff9f43;
+        }
+
+        .produto p {
+            font-size: 0.85em;
+            margin-bottom: 5px;
+            color: #ddd;
+        }
+
+        .selecionar-peso {
+            background: #8e44ad;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 6px;
+            margin-top: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 0.9em;
+        }
+
+        .selecionar-peso:hover {
+            background: #9b59b6;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: rgba(67, 40, 110, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 90%;
+            max-width: 300px;
+        }
+
+        .modal-content button {
+            background: #8e44ad;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            margin: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 0.9em;
+        }
+
+        .modal-content button:hover {
+            background: #9b59b6;
+        }
+
+        .carrinho {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .carrinho h2 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #ff6b6b;
+        }
+
+        #itens-carrinho div {
+            padding: 8px;
+            margin: 8px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9em;
+            color: #ddd;
+        }
+
+        .remove-btn {
+            background: none;
+            color: #ff6b6b;
+            padding: 4px;
+            margin-left: 8px;
+            width: auto;
+            font-size: 0.9em;
+            cursor: pointer;
+        }
+
+        .remove-btn:hover {
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        #frete-info {
+            margin-top: 8px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            display: none;
+            font-size: 0.9em;
+            color: #ddd;
+        }
+
+        button {
+            background: #8e44ad;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 0.9em;
+        }
+
+        button:hover {
+            background: #9b59b6;
+            transform: scale(1.02);
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 500;
+            font-size: 0.9em;
+            color: #ddd;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header class="logo">
+        <h1>LanchesNet</h1>
+        <p>Entregas em até 45 minutos!</p>
+    </header>
+
+    <div class="categorias">
+        <div class="categoria-btn active" onclick="filtrarCategoria('todos')">Todos</div>
+        <div class="categoria-btn" onclick="filtrarCategoria('hamburgueres')">Hambúrgueres</div>
+        <div class="categoria-btn" onclick="filtrarCategoria('pizzas')">Pizzas</div>
+        <div class="categoria-btn" onclick="filtrarCategoria('pasteis')">Pastéis</div>
+        <div class="categoria-btn" onclick="filtrarCategoria('batatas')">Batata Frita</div>
+        <div class="categoria-btn" onclick="filtrarCategoria('refrigerantes')">Refrigerantes</div>
+    </div>
+
+    <main class="produtos-container">
+        <!-- Hambúrgueres -->
+        <section class="categoria-section" data-categoria="hamburgueres">
+            <h2>🍔 Hambúrgueres</h2>
+            <div class="produtos">
+                <article class="produto">
+                    <h3>X-Tudo</h3>
+                    <p>Ingredientes: Pão, carne, alface, ovo, molhos, passas, queijo ralado, milho, cheddar.</p>
+                    <p>Preço: R$14,90</p>
+                    <button onclick="addToCart('HB01', 'X-Tudo', 14.90)">Adicionar</button>
+                </article>
+                <article class="produto">
+                    <h3>X-Salada</h3>
+                    <p>Ingredientes: Pão, salada, carne, milho, ovo, molho, azeitona.</p>
+                    <p>Preço: R$13,90</p>
+                    <button onclick="addToCart('HB02', 'X-Salada', 13.90)">Adicionar</button>
+                </article>
+                <article class="produto">
+                    <h3>X-Bacon</h3>
+                    <p>Ingredientes: Pão, carne, bacon/linguiça, molho, alface, tomate, cheddar.</p>
+                    <p>Preço: R$15,00</p>
+                    <button onclick="addToCart('HB03', 'X-Bacon', 15.00)">Adicionar</button>
+                </article>
+                <article class="produto">
+                    <h3>Hambúrguer Simples</h3>
+                    <p>Ingredientes: Pão, carne, cheddar, salada, ovo, molhos.</p>
+                    <p>Preço: R$8,50</p>
+                    <button onclick="addToCart('HB04', 'Hambúrguer Simples', 8.50)">Adicionar</button>
+                </article>
+            </div>
+        </section>
+
+        <!-- Pizzas -->
+        <section class="categoria-section" data-categoria="pizzas">
+            <h2>🍕 Pizzas</h2>
+            <div class="produtos">
+                <article class="produto">
+                    <h3>Calabresa</h3>
+                    <p>Preço: R$50,90</p>
+                    <button onclick="addToCart('PZ01', 'Pizza Calabresa', 50.90)">Adicionar</button>
+                </article>
+                <article class="produto">
+                    <h3>Frango + Catupiry</h3>
+                    <p>Preço: R$65,50</p>
+                    <button onclick="addToCart('PZ02', 'Pizza Frango + Catupiry', 65.50)">Adicionar</button>
+                </article>
+                <article class="produto">
+                    <h3>Marguerita</h3>
+                    <p>Preço: R$56,90</p>
+                    <button onclick="addToCart('PZ03', 'Pizza Marguerita', 56.90)">Adicionar</button>
+                </article>
+                <article class="produto">
+                    <h3>Muçarela</h3>
+                    <p>Preço: R$50,00</p>
+                    <button onclick="addToCart('PZ04', 'Pizza Muçarela', 50.00)">Adicionar</button>
+                </article>
+                <article class="produto">
+                    <h3>4 Queijos</h3>
+                    <p>Preço: R$85,00</p>
+                    <button onclick="addToCart('PZ05', 'Pizza 4 Queijos', 85.00)">Adicionar</button>
+                </article>
+            </div>
+        </section>
+
+        <!-- Pastéis -->
+        <section class="categoria-section" data-categoria="pasteis">
+            <h2>😋 Pastéis</h2>
+            <div class="produtos">
+                <article class="produto">
+                    <h3>Carne</h3>
+                    <p>Preço: R$12,00</p>
+                    <button onclick="addToCart('PT01', 'Pastel de Carne', 12.00)">Adicionar</button>
+                </article>
+                <article class="produto">
+                    <h3>Carne + Milho</h3>
+                    <p>Preço: R$14,00</p>
+                    <button onclick="addToCart('PT02', 'Pastel Carne + Milho', 14.00)">Adicionar</button>
+                </article>
+                <article class="produto">
+                    <h3>Queijo + Presunto</h3>
+                    <p>Preço: R$16,00</p>
+                    <button onclick="addToCart('PT03', 'Pastel Queijo + Presunto', 16.00)">Adicionar</button>
+                </article>
+            </div>
+        </section>
+
+        <!-- Batata Frita -->
+        <section class="categoria-section" data-categoria="batatas">
+            <h2>🍟 Batata Frita</h2>
+            <div class="produtos">
+                <article class="produto">
+                    <h3>Batata + Linguiça</h3>
+                    <p>Escolha o tamanho:</p>
+                    <button class="selecionar-peso" onclick="abrirModal('BT01', 'Batata + Linguiça', 15.50, 25.00)">Selecionar Peso</button>
+                </article>
+                <article class="produto">
+                    <h3>Batata + Queijo/Linguiça</h3>
+                    <p>Escolha o tamanho:</p>
+                    <button class="selecionar-peso" onclick="abrirModal('BT02', 'Batata + Queijo/Linguiça', 15.00, 35.00)">Selecionar Peso</button>
+                </article>
+                <article class="produto">
+                    <h3>Batata + Bacon/Linguiça</h3>
+                    <p>Escolha o tamanho:</p>
+                    <button class="selecionar-peso" onclick="abrirModal('BT03', 'Batata + Bacon/Linguiça', 16.90, 28.50)">Selecionar Peso</button>
+                </article>
+                <article class="produto">
+                    <h3>Batata + Cheddar/Bacon</h3>
+                    <p>Escolha o tamanho:</p>
+                    <button class="selecionar-peso" onclick="abrirModal('BT04', 'Batata + Cheddar/Bacon', 25.50, 35.90)">Selecionar Peso</button>
+                </article>
+                <article class="produto">
+                    <h3>Batata + Frango</h3>
+                    <p>Escolha o tamanho:</p>
+                    <button class="selecionar-peso" onclick="abrirModal('BT05', 'Batata + Frango', 17.00, 21.00)">Selecionar Peso</button>
+                </article>
+                <article class="produto">
+                    <h3>Batata + Alho</h3>
+                    <p>Escolha o tamanho:</p>
+                    <button class="selecionar-peso" onclick="abrirModal('BT06', 'Batata + Alho', 12.00, 24.00)">Selecionar Peso</button>
+                </article>
+            </div>
+        </section>
+
+        <!-- Refrigerantes -->
+        <section class="categoria-section" data-categoria="refrigerantes">
+            <h2>🥤 Refrigerantes</h2>
+            <div class="produtos">
+                <article class="produto">
+                    <h3>Coca-Cola 500ml</h3>
+                    <p>Preço: R$6,50</p>
+                    <button onclick="addToCart('RF01', 'Coca-Cola 500ml', 6.50)">Adicionar</button>
+                </article>
+                <article class="produto">
+                    <h3>Guaraná Antarctica</h3>
+                    <p>Preço: R$10,90</p>
+                    <button onclick="addToCart('RF02', 'Guaraná Antarctica', 10.90)">Adicionar</button>
+                </article>
+                <article class="produto">
+                    <h3>Guaracamp</h3>
+                    <p>Preço: R$4,50</p>
+                    <button onclick="addToCart('RF03', 'Guaracamp', 4.50)">Adicionar</button>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal para seleção de peso -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h3 id="modal-titulo"></h3>
+            <button onclick="selecionarPeso(500)">500g</button>
+            <button onclick="selecionarPeso(1000)">1kg</button>
+            <button onclick="fecharModal()">Cancelar</button>
+        </div>
+    </div>
+
+    <section class="carrinho">
+        <h2>Seu Carrinho</h2>
+        <div id="itens-carrinho"></div>
+        <div id="frete-info"></div>
+        <p style="margin: 10px 0; text-align: right;">
+            Subtotal: R$ <span id="subtotal">0,00</span><br>
+            Frete: R$ <span id="frete">0,00</span><br>
+            Total: R$ <span id="total">0,00</span>
+        </p>
+    </section>
+
+    <section class="carrinho">
+        <h2>Dados para Entrega</h2>
+        <form id="form-entrega" onsubmit="return false;">
+            <div class="input-group">
+                <label for="nome-completo">Nome Completo:</label>
+                <input type="text" id="nome-completo" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="telefone">WhatsApp:</label>
+                <input type="tel" id="telefone" pattern="[0-9]{11}" placeholder="Ex: 21912345678" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="cep">CEP:</label>
+                <input type="text" id="cep" pattern="[0-9]{8}" placeholder="Ex: 22041001" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="numero">Número da Casa:</label>
+                <input type="text" id="numero" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="pagamento">Forma de Pagamento:</label>
+                <select id="pagamento" required>
+                    <option value="">Selecione...</option>
+                    <option value="Pix">Pix</option>
+                    <option value="Cartão">Cartão</option>
+                    <option value="Dinheiro">Dinheiro</option>
+                </select>
+            </div>
+            
+            <button onclick="finalizarPedido()">Finalizar Pedido</button>
+        </form>
+    </section>
+
+    <script>
+        let carrinho = [];
+        let shippingCost = 0;
+        const storeCEP = '23030020';
+
+        // Variáveis para o modal de seleção de peso
+        let modal;
+        let itemAtual = { id: null, nome: null, preco500g: null, preco1kg: null };
+
+        // Lista de bairros do RJ com valores de frete
+        const fretePorBairro = {
+            'Guaratiba': 12.00
+        };
+
+        // Função para abrir o modal de seleção de peso
+        function abrirModal(id, nome, preco500g, preco1kg) {
+            itemAtual = { id, nome, preco500g, preco1kg };
+            modal = document.getElementById('modal');
+            document.getElementById('modal-titulo').textContent = nome;
+            modal.style.display = 'flex';
+        }
+
+        // Função para fechar o modal
+        function fecharModal() {
+            modal.style.display = 'none';
+        }
+
+        // Função para selecionar o peso e adicionar ao carrinho
+        function selecionarPeso(peso) {
+            const { id, nome, preco500g, preco1kg } = itemAtual;
+            const preco = peso === 500 ? preco500g : preco1kg;
+            const nomeCompleto = `${nome} ${peso === 500 ? '500g' : '1kg'}`;
+            addToCart(id, nomeCompleto, preco);
+            fecharModal();
+        }
+
+        // Função para filtrar categorias
+        function filtrarCategoria(categoria) {
+            document.querySelectorAll('.categoria-section').forEach(section => {
+                if(categoria === 'todos') {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = section.dataset.categoria === categoria ? 'block' : 'none';
+                }
+            });
+
+            document.querySelectorAll('.categoria-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.toLowerCase() === categoria);
+            });
+        }
+
+        // Função para adicionar itens ao carrinho
+        function addToCart(id, nome, preco) {
+            const itemExistente = carrinho.find(item => item.id === id && item.nome === nome);
+            
+            if(itemExistente) {
+                itemExistente.quantidade++;
+            } else {
+                carrinho.push({id, nome, preco, quantidade: 1});
+            }
+            
+            atualizarCarrinho();
+            showFeedback('Item adicionado ao carrinho!');
+        }
+
+        // Função para atualizar o carrinho
+        function atualizarCarrinho() {
+            const container = document.getElementById('itens-carrinho');
+            const subtotalElement = document.getElementById('subtotal');
+            const freteElement = document.getElementById('frete');
+            const totalElement = document.getElementById('total');
+            let html = '';
+            let subtotalValue = 0;
+
+            carrinho.forEach(item => {
+                subtotalValue += item.preco * item.quantidade;
+                html += `
+                    <div>
+                        <span>${item.nome}</span>
+                        <span>
+                            x${item.quantidade}
+                            <button class="remove-btn" onclick="removerItem('${item.id}', '${item.nome}')">❌</button>
+                        </span>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            
+            subtotalElement.textContent = subtotalValue.toFixed(2).replace('.', ',');
+            freteElement.textContent = shippingCost.toFixed(2).replace('.', ',');
+            totalElement.textContent = (subtotalValue + shippingCost).toFixed(2).replace('.', ',');
+        }
+
+        // Função para remover itens do carrinho
+        function removerItem(id, nome) {
+            carrinho = carrinho.filter(item => item.id !== id || item.nome !== nome);
+            atualizarCarrinho();
+            showFeedback('Item removido do carrinho!');
+        }
+
+        // Função para exibir feedback
+        function showFeedback(message) {
+            const feedback = document.createElement('div');
+            feedback.style.position = 'fixed';
+            feedback.style.bottom = '20px';
+            feedback.style.right = '20px';
+            feedback.style.backgroundColor = '#8e44ad';
+            feedback.style.color = 'white';
+            feedback.style.padding = '15px 25px';
+            feedback.style.borderRadius = '8px';
+            feedback.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+            feedback.textContent = message;
+
+            document.body.appendChild(feedback);
+            setTimeout(() => feedback.remove(), 2000);
+        }
+
+        // Função para validar campos do formulário
+        function validarCampos() {
+            const campos = ['nome-completo', 'telefone', 'cep', 'numero', 'pagamento'];
+            for(let campo of campos) {
+                const element = document.getElementById(campo);
+                if(!element.value) {
+                    showFeedback(`Preencha o campo: ${element.labels[0].textContent}`);
+                    element.focus();
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Função para calcular o frete
+        function calcularFrete(bairroCliente) {
+            const freteInfo = document.getElementById('frete-info');
+            const frete = fretePorBairro[bairroCliente] || Null;
+            
+            shippingCost = frete;
+            freteInfo.innerHTML = `Frete calculado para: ${bairroCliente}`;
+            freteInfo.style.display = 'block';
+            atualizarCarrinho();
+        }
+
+        // Evento para calcular o frete ao digitar o CEP
+        document.getElementById('cep').addEventListener('blur', function() {
+            const cep = this.value.replace(/\D/g, '');
+            if(cep.length !== 8) return;
+
+            fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                .then(response => response.json())
+                .then(data => {
+                    if(data.erro) {
+                        showFeedback('CEP não encontrado!');
+                        return;
+                    }
+                    calcularFrete(data.bairro);
+                })
+                .catch(error => {
+                    showFeedback('Erro ao calcular frete!');
+                });
+        });
+
+        // Função para finalizar o pedido
+        function finalizarPedido() {
+            if(carrinho.length === 0) {
+                showFeedback('Seu carrinho está vazio!');
+                return;
+            }
+
+            if(!validarCampos()) return;
+
+            if(shippingCost === 0) {
+                showFeedback('Calcule o frete antes de finalizar!');
+                return;
+            }
+
+            const dados = {
+                nomeCompleto: document.getElementById('nome-completo').value,
+                telefone: document.getElementById('telefone').value,
+                cep: document.getElementById('cep').value,
+                numero: document.getElementById('numero').value,
+                pagamento: document.getElementById('pagamento').value
+            };
+
+            let mensagem = `*PEDIDO - LanchesNet*%0A%0A`;
+            mensagem += `*DADOS DO CLIENTE*%0A`;
+            mensagem += `Nome: ${dados.nomeCompleto}%0A`;
+            mensagem += `Contato: ${dados.telefone}%0A`;
+            mensagem += `Endereço: CEP ${dados.cep} - Nº ${dados.numero}%0A%0A`;
+            mensagem += `*FORMA DE PAGAMENTO*%0A`;
+            mensagem += `${dados.pagamento}%0A%0A`;
+            mensagem += `*ITENS DO PEDIDO*%0A`;
+
+            carrinho.forEach((item, index) => {
+                mensagem += `----------------------------%0A`;
+                mensagem += `Item ${index + 1}%0A`;
+                mensagem += `Nome: ${item.nome}%0A`;
+                mensagem += `Quantidade: ${item.quantidade}%0A`;
+                mensagem += `Valor: R$ ${(item.preco * item.quantidade).toFixed(2)}%0A`;
+            });
+
+            mensagem += `%0A----------------------------%0A`;
+            mensagem += `*SUBTOTAL: R$ ${document.getElementById('subtotal').textContent}*%0A`;
+            mensagem += `*FRETE: R$ ${document.getElementById('frete').textContent}*%0A`;
+            mensagem += `*TOTAL: R$ ${document.getElementById('total').textContent}*%0A%0A`;
+            mensagem += `Pedido pronto para confirmação!`;
+
+            const linkWhatsApp = `https://wa.me/5521980241228?text=${mensagem}`;
+            window.open(linkWhatsApp, '_blank');
+        }
+    </script>
+</body>
