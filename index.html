@@ -24,21 +24,11 @@
             color: #fff;
             min-height: 100vh;
             padding: 10px;
-        }
-
-        /* Fundo fixo sem blur */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
             background: linear-gradient(rgba(67, 40, 110, 0.95), rgba(67, 40, 110, 0.95)),
                         url('https://img.freepik.com/vetores-premium/fundo-sem-costura-com-desenhos-de-fast-food-de-batatas-fritas-tomates-e-hamburgueres_604214-5342.jpg?w=1380');
             background-size: cover;
             background-position: center;
-            z-index: -1;
+            background-attachment: fixed; /* Fundo fixo */
         }
 
         .logo {
@@ -47,8 +37,6 @@
             padding: 15px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
-            backdrop-filter: blur(10px); /* Mantido apenas na logo */
-            will-change: transform; /* Otimiza a renderização */
         }
 
         .logo h1 {
@@ -79,7 +67,6 @@
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 20px;
-            will-change: transform; /* Otimiza a renderização */
         }
 
         .destaque-header {
@@ -127,7 +114,6 @@
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
-            will-change: transform; /* Otimiza a renderização */
         }
 
         .produto:hover {
@@ -184,7 +170,6 @@
             max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
-            will-change: transform; /* Otimiza a renderização */
         }
 
         .carrinho h2 {
