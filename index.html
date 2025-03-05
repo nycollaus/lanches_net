@@ -5,47 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LanchesNet</title>
     <style>
-        /* Reset de margens e padding */
-        html, body {
+        /* Reset básico */
+        * {
             margin: 0;
             padding: 0;
-            height: 100%; /* Garante que o body ocupe 100% da altura da tela */
-            overflow-x: hidden; /* Evita rolagem horizontal */
+            box-sizing: border-box;
         }
 
+        /* Fontes e cores */
         body {
+            font-family: 'Poppins', sans-serif;
             background: linear-gradient(rgba(67, 40, 110, 0.95), rgba(67, 40, 110, 0.95)),
                         url('https://img.freepik.com/vetores-premium/fundo-sem-costura-com-desenhos-de-fast-food-de-batatas-fritas-tomates-e-hamburgueres_604214-5342.jpg?w=1380');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Faz a imagem de fundo ficar estática */
+            background-attachment: fixed;
             color: #fff;
-            min-height: 100vh; /* Garante que o body ocupe pelo menos 100% da altura da tela */
-            padding: 10px;
-            box-sizing: border-box; /* Inclui o padding no cálculo da altura */
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
         }
 
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: #ff9f43;
+        }
+
+        p {
+            font-size: 0.95em;
+            color: #ddd;
+        }
+
+        /* Layout geral */
         .logo {
             text-align: center;
-            margin-bottom: 20px;
-            padding: 15px;
+            margin-bottom: 30px;
+            padding: 20px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             backdrop-filter: blur(10px);
         }
 
         .logo h1 {
-            font-size: 2em;
+            font-size: 2.5em;
             background: linear-gradient(45deg, #ff9f43, #ff6b6b);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
 
         .logo p {
-            font-size: 0.9em;
+            font-size: 1em;
             color: #ddd;
         }
 
@@ -53,25 +65,18 @@
             background: #ff6b6b;
             padding: 15px;
             text-align: center;
-            margin-bottom: 15px;
-            border-radius: 10px;
-        }
-
-        .destaque-section {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 10px;
             margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .destaque-header {
-            text-align: center;
-            margin-bottom: 15px;
+        .promocao-banner h3 {
+            font-size: 1.4em;
+            margin-bottom: 5px;
         }
 
-        .destaque-header h2 {
-            color: #ff9f43;
-            font-size: 1.5em;
+        .promocao-banner p {
+            font-size: 1em;
         }
 
         .produtos-container {
@@ -79,48 +84,52 @@
             margin: 0 auto;
         }
 
-        .categoria-section {
+        .destaque-section, .categoria-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(12px);
+        }
+
+        .destaque-header {
+            text-align: center;
             margin-bottom: 20px;
         }
 
-        .categoria-section h2 {
+        .destaque-header h2 {
+            font-size: 1.8em;
             margin-bottom: 10px;
-            padding-left: 10px;
-            border-left: 4px solid #8e44ad;
-            font-size: 1.2em;
-            color: #ff6b6b;
+        }
+
+        .destaque-header p {
+            font-size: 1em;
         }
 
         .produtos {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-
-        @media (min-width: 768px) {
-            .produtos {
-                grid-template-columns: repeat(3, 1fr);
-            }
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
         }
 
         .produto {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
-            padding: 10px;
+            padding: 15px;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .produto:hover {
             transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
 
         .produto-imagem {
             width: 100%;
-            height: 150px;
+            height: 180px;
             overflow: hidden;
-            border-radius: 10px 10px 0 0;
+            border-radius: 10px;
             margin-bottom: 10px;
         }
 
@@ -131,27 +140,25 @@
         }
 
         .produto h3 {
-            font-size: 1em;
-            margin-bottom: 5px;
-            color: #ff9f43;
+            font-size: 1.2em;
+            margin-bottom: 10px;
         }
 
         .produto p {
-            font-size: 0.85em;
-            margin-bottom: 5px;
-            color: #ddd;
+            font-size: 0.9em;
+            margin-bottom: 10px;
         }
 
         .produto button {
             background: #8e44ad;
             color: white;
             border: none;
-            padding: 8px;
+            padding: 10px;
             border-radius: 6px;
-            margin-top: 5px;
-            cursor: pointer;
             width: 100%;
-            font-size: 0.9em;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s ease;
         }
 
         .produto button:hover {
@@ -160,56 +167,47 @@
 
         .carrinho {
             background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 30px;
             backdrop-filter: blur(12px);
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         .carrinho h2 {
-            font-size: 1.2em;
-            margin-bottom: 10px;
-            color: #ff6b6b;
+            font-size: 1.5em;
+            margin-bottom: 15px;
         }
 
         #itens-carrinho div {
-            padding: 8px;
-            margin: 8px 0;
+            padding: 10px;
+            margin: 10px 0;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
+            border-radius: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.9em;
-            color: #ddd;
         }
 
         .remove-btn {
             background: none;
             color: #ff6b6b;
-            padding: 4px;
-            margin-left: 8px;
-            width: auto;
-            font-size: 0.9em;
+            border: none;
             cursor: pointer;
+            font-size: 1em;
         }
 
         .remove-btn:hover {
-            background: rgba(255, 107, 107, 0.1);
+            opacity: 0.8;
         }
 
         .input-group {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         label {
             display: block;
-            margin-bottom: 4px;
-            font-weight: 500;
-            font-size: 0.9em;
+            margin-bottom: 5px;
+            font-size: 0.95em;
             color: #ddd;
         }
 
@@ -219,27 +217,44 @@
             border: none;
             border-radius: 6px;
             background: rgba(255, 255, 255, 0.9);
-            font-size: 0.9em;
+            font-size: 0.95em;
         }
 
         button[type="submit"] {
             background: #8e44ad;
             color: white;
             border: none;
-            padding: 10px;
+            padding: 12px;
             border-radius: 6px;
-            margin-top: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
             width: 100%;
-            font-size: 0.9em;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s ease;
         }
 
         button[type="submit"]:hover {
             background: #9b59b6;
-            transform: scale(1.02);
+        }
+
+        /* Feedback */
+        .feedback {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #8e44ad;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="logo">
@@ -337,9 +352,8 @@
     <!-- Formulário de Entrega -->
     <section class="carrinho">
         <h2>Dados para Entrega</h2>
-        <!-- Aviso sobre áreas de entrega -->
         <div style="background: rgba(255, 107, 107, 0.2); padding: 10px; border-radius: 6px; margin-bottom: 15px;">
-            <p style="color: #ff6b6b; font-size: 0.9em; text-align: center;">
+            <p style="color: #ff6b6b; font-size: 0.95em; text-align: center;">
                 🚚 <strong>Áreas de Entrega:</strong> Atendemos apenas em <strong>Correia, Estrada do Mato Alto, Ilha de Guaratiba, Pedra e Piraquê</strong>.
             </p>
         </div>
@@ -348,22 +362,18 @@
                 <label for="nome-completo">Nome Completo:</label>
                 <input type="text" id="nome-completo" required>
             </div>
-            
             <div class="input-group">
                 <label for="telefone">WhatsApp:</label>
                 <input type="tel" id="telefone" pattern="[0-9]{11}" placeholder="Ex: 21912345678" required>
             </div>
-            
             <div class="input-group">
                 <label for="cep">CEP:</label>
                 <input type="text" id="cep" placeholder="Ex: 22041001" required>
             </div>
-            
             <div class="input-group">
                 <label for="numero">Número da Casa:</label>
                 <input type="text" id="numero" required>
             </div>
-            
             <div class="input-group">
                 <label for="pagamento">Forma de Pagamento:</label>
                 <select id="pagamento" required>
@@ -373,7 +383,6 @@
                     <option value="Dinheiro">Dinheiro</option>
                 </select>
             </div>
-            
             <button type="submit">Finalizar Pedido</button>
         </form>
     </section>
@@ -381,21 +390,17 @@
     <script>
         let carrinho = [];
 
-        // Função para adicionar itens ao carrinho
         function addToCart(id, nome, preco) {
             const itemExistente = carrinho.find(item => item.id === id && item.nome === nome);
-            
-            if(itemExistente) {
+            if (itemExistente) {
                 itemExistente.quantidade++;
             } else {
-                carrinho.push({id, nome, preco, quantidade: 1});
+                carrinho.push({ id, nome, preco, quantidade: 1 });
             }
-            
             atualizarCarrinho();
             showFeedback('Item adicionado ao carrinho!');
         }
 
-        // Função para atualizar o carrinho
         function atualizarCarrinho() {
             const container = document.getElementById('itens-carrinho');
             const subtotalElement = document.getElementById('subtotal');
@@ -417,38 +422,26 @@
             });
 
             container.innerHTML = html;
-            
             subtotalElement.textContent = subtotalValue.toFixed(2).replace('.', ',');
             totalElement.textContent = subtotalValue.toFixed(2).replace('.', ',');
         }
 
-        // Função para remover itens do carrinho
         function removerItem(id, nome) {
             carrinho = carrinho.filter(item => item.id !== id || item.nome !== nome);
             atualizarCarrinho();
             showFeedback('Item removido do carrinho!');
         }
 
-        // Função para exibir feedback
         function showFeedback(message) {
             const feedback = document.createElement('div');
-            feedback.style.position = 'fixed';
-            feedback.style.bottom = '20px';
-            feedback.style.right = '20px';
-            feedback.style.backgroundColor = '#8e44ad';
-            feedback.style.color = 'white';
-            feedback.style.padding = '15px 25px';
-            feedback.style.borderRadius = '8px';
-            feedback.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+            feedback.className = 'feedback';
             feedback.textContent = message;
-
             document.body.appendChild(feedback);
             setTimeout(() => feedback.remove(), 2000);
         }
 
-        // Função para finalizar o pedido
         function finalizarPedido() {
-            if(carrinho.length === 0) {
+            if (carrinho.length === 0) {
                 showFeedback('Seu carrinho está vazio!');
                 return;
             }
