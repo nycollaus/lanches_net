@@ -26,7 +26,7 @@
             padding: 10px;
         }
 
-        /* Fundo fixo com blur */
+        /* Fundo fixo sem blur */
         body::before {
             content: '';
             position: fixed;
@@ -39,7 +39,6 @@
             background-size: cover;
             background-position: center;
             z-index: -1;
-            filter: blur(5px); /* Aplica o efeito de blur */
         }
 
         .logo {
@@ -48,7 +47,8 @@
             padding: 15px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px); /* Mantido apenas na logo */
+            will-change: transform; /* Otimiza a renderização */
         }
 
         .logo h1 {
@@ -79,7 +79,7 @@
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 20px;
-            backdrop-filter: blur(10px);
+            will-change: transform; /* Otimiza a renderização */
         }
 
         .destaque-header {
@@ -123,11 +123,11 @@
 
         .produto {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
             padding: 10px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
+            will-change: transform; /* Otimiza a renderização */
         }
 
         .produto:hover {
@@ -178,13 +178,13 @@
 
         .carrinho {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
             padding: 15px;
             border-radius: 10px;
             margin-top: 20px;
             max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
+            will-change: transform; /* Otimiza a renderização */
         }
 
         .carrinho h2 {
