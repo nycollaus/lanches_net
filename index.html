@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LanchesNet - A Melhor Hamburgueria!</title>
     <style>
+        /* Reset básico */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
         }
 
         body {
+            font-family: 'Segoe UI', sans-serif;
             background: linear-gradient(rgba(40, 40, 40, 0.95), rgba(40, 40, 40, 0.95)),
                         url('https://img.freepik.com/vetores-premium/fundo-sem-costura-com-desenhos-de-fast-food-de-batatas-fritas-tomates-e-hamburgueres_604214-5342.jpg?w=1380');
             background-size: cover;
@@ -28,7 +29,7 @@
             padding: 15px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(5px); /* Reduzido para melhor desempenho */
         }
 
         .logo h1 {
@@ -37,7 +38,6 @@
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            -webkit-text-fill-color: transparent;
             margin-bottom: 5px;
             font-family: 'Luckiest Guy', cursive;
             letter-spacing: 2px;
@@ -60,22 +60,13 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
 
-        .promocao-banner h3 {
-            margin-bottom: 5px;
-        }
-
-        .destaque-section {
+        .destaque-section, .carrinho {
             background: rgba(255, 255, 255, 0.1);
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 20px;
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(5px); /* Reduzido para melhor desempenho */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .destaque-header {
-            text-align: center;
-            margin-bottom: 15px;
         }
 
         .destaque-header h2 {
@@ -90,10 +81,6 @@
             margin: 0 auto;
         }
 
-        .categoria-section {
-            margin-bottom: 20px;
-        }
-
         .categoria-section h2 {
             margin-bottom: 10px;
             padding-left: 10px;
@@ -106,27 +93,20 @@
 
         .produtos {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 10px;
-        }
-
-        @media (min-width: 768px) {
-            .produtos {
-                grid-template-columns: repeat(3, 1fr);
-            }
         }
 
         .produto {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
             padding: 10px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            transition: transform 0.2s ease;
         }
 
         .produto:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px); /* Efeito mais leve */
         }
 
         .produto-imagem {
@@ -170,23 +150,11 @@
             font-size: 1em;
             font-family: 'Luckiest Guy', cursive;
             letter-spacing: 1px;
-            transition: background 0.3s ease;
+            transition: background 0.2s ease;
         }
 
         .produto button:hover {
             background: #ff9f43;
-        }
-
-        .carrinho {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .carrinho h2 {
@@ -219,10 +187,6 @@
             cursor: pointer;
         }
 
-        .remove-btn:hover {
-            background: rgba(255, 107, 107, 0.1);
-        }
-
         .input-group {
             margin-bottom: 10px;
         }
@@ -252,7 +216,7 @@
             border-radius: 6px;
             margin-top: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             width: 100%;
             font-size: 1em;
             font-family: 'Luckiest Guy', cursive;
@@ -261,7 +225,6 @@
 
         button[type="submit"]:hover {
             background: #ff9f43;
-            transform: scale(1.02);
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Pacifico&display=swap" rel="stylesheet">
@@ -288,7 +251,7 @@
             <div class="produtos">
                 <article class="produto">
                     <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/x-tudo.jpg" alt="X-Tudo">
+                        <img src="https://exemplo.com/imagens/x-tudo.jpg" alt="X-Tudo" loading="lazy">
                     </div>
                     <h3>X-Tudo Premium</h3>
                     <p>Carne 200g, bacon crocante, cheddar derretido e molho especial</p>
@@ -297,7 +260,7 @@
                 </article>
                 <article class="produto">
                     <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/x-bacon.jpg" alt="X-Bacon">
+                        <img src="https://exemplo.com/imagens/x-bacon.jpg" alt="X-Bacon" loading="lazy">
                     </div>
                     <h3>X-Bacon Supremo</h3>
                     <p>Triplo bacon, queijo prato e molho barbecue</p>
@@ -313,7 +276,7 @@
             <div class="produtos">
                 <article class="produto">
                     <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/x-tudo.jpg" alt="X-Tudo">
+                        <img src="https://exemplo.com/imagens/x-tudo.jpg" alt="X-Tudo" loading="lazy">
                     </div>
                     <h3>X-Tudo Clássico</h3>
                     <p>Ingredientes: Pão, carne, alface, ovo, molhos, queijo</p>
@@ -322,7 +285,7 @@
                 </article>
                 <article class="produto">
                     <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/x-salada.jpg" alt="X-Salada">
+                        <img src="https://exemplo.com/imagens/x-salada.jpg" alt="X-Salada" loading="lazy">
                     </div>
                     <h3>X-Salada Light</h3>
                     <p>Ingredientes: Pão integral, frango grelhado, salada fresca</p>
@@ -338,7 +301,7 @@
             <div class="produtos">
                 <article class="produto">
                     <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/coca-cola.jpg" alt="Guaravita">
+                        <img src="https://exemplo.com/imagens/coca-cola.jpg" alt="Guaravita" loading="lazy">
                     </div>
                     <h3>Guaravita 290ml</h3>
                     <p>Bebida gelada</p>
