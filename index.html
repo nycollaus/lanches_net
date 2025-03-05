@@ -32,21 +32,16 @@
             backdrop-filter: blur(5px); /* Reduzido para melhor desempenho */
         }
 
-        .logo h1 {
-            font-size: 2.5em;
-            background: linear-gradient(45deg, #ff9f43, #ff6b6b);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            margin-bottom: 5px;
-            font-family: 'Luckiest Guy', cursive;
-            letter-spacing: 2px;
+        .logo img {
+            max-width: 200px; /* Ajuste o tamanho do logo conforme necessário */
+            height: auto;
         }
 
         .logo p {
             font-size: 1em;
             color: #ddd;
             font-family: 'Pacifico', cursive;
+            margin-top: 10px;
         }
 
         .promocao-banner {
@@ -231,7 +226,7 @@
 </head>
 <body>
     <header class="logo">
-        <h1>Street Burger</h1>
+        <img src="STREETBURGER.png" alt="Street Burger Logo">
         <p>Entregas em até 45 minutos!</p>
     </header>
 
