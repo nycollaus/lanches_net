@@ -335,10 +335,8 @@
     <section class="carrinho">
         <h2>Seu Carrinho</h2>
         <div id="itens-carrinho"></div>
-        <div id="frete-info"></div>
         <p style="margin: 10px 0; text-align: right;">
             Subtotal: R$ <span id="subtotal">0,00</span><br>
-            Frete: R$ <span id="frete">0,00</span><br>
             Total: R$ <span id="total">0,00</span>
         </p>
     </section>
@@ -383,13 +381,6 @@
 
     <script>
         let carrinho = [];
-        let shippingCost = 0;
-        const storeCEP = '23030020';
-
-        // Lista de bairros do RJ com valores de frete
-        const fretePorBairro = {
-            'Guaratiba': 12.00
-        };
 
         // Função para adicionar itens ao carrinho
         function addToCart(id, nome, preco) {
@@ -409,7 +400,6 @@
         function atualizarCarrinho() {
             const container = document.getElementById('itens-carrinho');
             const subtotalElement = document.getElementById('subtotal');
-            const freteElement = document.getElementById('frete');
             const totalElement = document.getElementById('total');
             let html = '';
             let subtotalValue = 0;
@@ -430,8 +420,7 @@
             container.innerHTML = html;
             
             subtotalElement.textContent = subtotalValue.toFixed(2).replace('.', ',');
-            freteElement.textContent = shippingCost.toFixed(2).replace('.', ',');
-            totalElement.textContent = (subtotalValue + shippingCost).toFixed(2).replace('.', ',');
+            totalElement.textContent = subtotalValue.toFixed(2).replace('.', ',');
         }
 
         // Função para remover itens do carrinho
@@ -458,45 +447,10 @@
             setTimeout(() => feedback.remove(), 2000);
         }
 
-        // Função para calcular o frete
-        function calcularFrete(bairroCliente) {
-            const freteInfo = document.getElementById('frete-info');
-            const frete = fretePorBairro[bairroCliente] || 0;
-            
-            shippingCost = frete;
-            freteInfo.innerHTML = `Frete calculado para: ${bairroCliente}`;
-            freteInfo.style.display = 'block';
-            atualizarCarrinho();
-        }
-
-        // Evento para calcular o frete ao digitar o CEP
-        document.getElementById('cep').addEventListener('blur', function() {
-            const cep = this.value.replace(/\D/g, '');
-            if(cep.length !== 8) return;
-
-            fetch(`https://viacep.com.br/ws/${cep}/json/`)
-                .then(response => response.json())
-                .then(data => {
-                    if(data.erro) {
-                        showFeedback('CEP não encontrado!');
-                        return;
-                    }
-                    calcularFrete(data.bairro);
-                })
-                .catch(error => {
-                    showFeedback('Erro ao calcular frete!');
-                });
-        });
-
         // Função para finalizar o pedido
         function finalizarPedido() {
             if(carrinho.length === 0) {
                 showFeedback('Seu carrinho está vazio!');
-                return;
-            }
-
-            if(shippingCost === 0) {
-                showFeedback('Calcule o frete antes de finalizar!');
                 return;
             }
 
@@ -527,7 +481,6 @@
 
             mensagem += `%0A----------------------------%0A`;
             mensagem += `*SUBTOTAL: R$ ${document.getElementById('subtotal').textContent}*%0A`;
-            mensagem += `*FRETE: R$ ${document.getElementById('frete').textContent}*%0A`;
             mensagem += `*TOTAL: R$ ${document.getElementById('total').textContent}*%0A%0A`;
             mensagem += `Pedido pronto para confirmação!`;
 
