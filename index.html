@@ -32,52 +32,43 @@
         }
 
         .logo h1 {
-    font-size: 2em;
-    background: linear-gradient(45deg, #ff9f43, #ff6b6b);
-    background-clip: text; /* Propriedade padrão */
-    -webkit-background-clip: text; /* Prefixo para compatibilidade com navegadores WebKit */
-    color: transparent; /* Propriedade padrão */
-    -webkit-text-fill-color: transparent; /* Prefixo para compatibilidade com navegadores WebKit */
-    margin-bottom: 5px;
-}
+            font-size: 2em;
+            background: linear-gradient(45deg, #ff9f43, #ff6b6b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
 
         .logo p {
             font-size: 0.9em;
             color: #ddd;
         }
 
-        .categorias {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            padding: 10px 0;
+        .promocao-banner {
+            background: #ff6b6b;
+            padding: 15px;
+            text-align: center;
             margin-bottom: 15px;
-            scrollbar-width: thin;
-            scrollbar-color: #8e44ad rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
         }
 
-        .categorias::-webkit-scrollbar {
-            height: 6px;
-        }
-
-        .categorias::-webkit-scrollbar-thumb {
-            background: #8e44ad;
-            border-radius: 3px;
-        }
-
-        .categoria-btn {
+        .destaque-section {
             background: rgba(255, 255, 255, 0.1);
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.3s ease;
-            font-size: 0.9em;
-            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
         }
 
-        .categoria-btn.active {
-            background: #8e44ad;
+        .destaque-header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .destaque-header h2 {
+            color: #ff9f43;
+            font-size: 1.5em;
         }
 
         .produtos-container {
@@ -148,7 +139,7 @@
             color: #ddd;
         }
 
-        .selecionar-peso {
+        .produto button {
             background: #8e44ad;
             color: white;
             border: none;
@@ -160,44 +151,7 @@
             font-size: 0.9em;
         }
 
-        .selecionar-peso:hover {
-            background: #9b59b6;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: rgba(67, 40, 110, 0.95);
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            width: 90%;
-            max-width: 300px;
-        }
-
-        .modal-content button {
-            background: #8e44ad;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 6px;
-            margin: 5px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 0.9em;
-        }
-
-        .modal-content button:hover {
+        .produto button:hover {
             background: #9b59b6;
         }
 
@@ -254,24 +208,6 @@
             color: #ddd;
         }
 
-        button {
-            background: #8e44ad;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 6px;
-            margin-top: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            font-size: 0.9em;
-        }
-
-        button:hover {
-            background: #9b59b6;
-            transform: scale(1.02);
-        }
-
         .input-group {
             margin-bottom: 10px;
         }
@@ -292,6 +228,24 @@
             background: rgba(255, 255, 255, 0.9);
             font-size: 0.9em;
         }
+
+        button[type="submit"] {
+            background: #8e44ad;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 0.9em;
+        }
+
+        button[type="submit"]:hover {
+            background: #9b59b6;
+            transform: scale(1.02);
+        }
     </style>
 </head>
 <body>
@@ -300,234 +254,84 @@
         <p>Entregas em até 45 minutos!</p>
     </header>
 
-    <div class="categorias">
-        <div class="categoria-btn active" onclick="filtrarCategoria('todos')">Todos</div>
-        <div class="categoria-btn" onclick="filtrarCategoria('hamburgueres')">Hambúrgueres</div>
-        <div class="categoria-btn" onclick="filtrarCategoria('pizzas')">Pizzas</div>
-        <div class="categoria-btn" onclick="filtrarCategoria('pasteis')">Pastéis</div>
-        <div class="categoria-btn" onclick="filtrarCategoria('batatas')">Batata Frita</div>
-        <div class="categoria-btn" onclick="filtrarCategoria('refrigerantes')">Refrigerantes</div>
+    <!-- Seção de Promoção -->
+    <div class="promocao-banner">
+        <h3>🚨 PROMOÇÃO DO DIA! 🚨</h3>
+        <p>Hambúrguer Duplo + Refri por apenas R$ 19,90!</p>
     </div>
 
     <main class="produtos-container">
-        <!-- Hambúrgueres -->
-        <section class="categoria-section" data-categoria="hamburgueres">
-            <h2>🍔 Hambúrgueres</h2>
+        <!-- Destaque Pinhais Hambúrgueres -->
+        <section class="destaque-section">
+            <div class="destaque-header">
+                <h2>🌟 DESTAQUE PINHAIS HAMBÚRGUERES 🌟</h2>
+                <p>Os mais pedidos da semana!</p>
+            </div>
             <div class="produtos">
                 <article class="produto">
                     <div class="produto-imagem">
                         <img src="https://exemplo.com/imagens/x-tudo.jpg" alt="X-Tudo">
                     </div>
-                    <h3>X-Tudo</h3>
-                    <p>Ingredientes: Pão, carne, alface, ovo, molhos, passas, queijo ralado, milho, cheddar.</p>
-                    <p>Preço: R$14,90</p>
-                    <button onclick="addToCart('HB01', 'X-Tudo', 14.90)">Adicionar</button>
-                </article>
-                <article class="produto">
-                    <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/x-salada.jpg" alt="X-Salada">
-                    </div>
-                    <h3>X-Salada</h3>
-                    <p>Ingredientes: Pão, salada, carne, milho, ovo, molho, azeitona.</p>
-                    <p>Preço: R$13,90</p>
-                    <button onclick="addToCart('HB02', 'X-Salada', 13.90)">Adicionar</button>
+                    <h3>X-Tudo Premium</h3>
+                    <p>Carne 200g, bacon crocante, cheddar derretido e molho especial</p>
+                    <p>Preço: R$24,90</p>
+                    <button onclick="addToCart('HB00', 'X-Tudo Premium', 24.90)">Adicionar</button>
                 </article>
                 <article class="produto">
                     <div class="produto-imagem">
                         <img src="https://exemplo.com/imagens/x-bacon.jpg" alt="X-Bacon">
                     </div>
-                    <h3>X-Bacon</h3>
-                    <p>Ingredientes: Pão, carne, bacon/linguiça, molho, alface, tomate, cheddar.</p>
-                    <p>Preço: R$15,00</p>
-                    <button onclick="addToCart('HB03', 'X-Bacon', 15.00)">Adicionar</button>
-                </article>
-                <article class="produto">
-                    <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/hamburguer-simples.jpg" alt="Hambúrguer Simples">
-                    </div>
-                    <h3>Hambúrguer Simples</h3>
-                    <p>Ingredientes: Pão, carne, cheddar, salada, ovo, molhos.</p>
-                    <p>Preço: R$8,50</p>
-                    <button onclick="addToCart('HB04', 'Hambúrguer Simples', 8.50)">Adicionar</button>
+                    <h3>X-Bacon Supremo</h3>
+                    <p>Triplo bacon, queijo prato e molho barbecue</p>
+                    <p>Preço: R$22,50</p>
+                    <button onclick="addToCart('HB01', 'X-Bacon Supremo', 22.50)">Adicionar</button>
                 </article>
             </div>
         </section>
 
-        <!-- Pizzas -->
-        <section class="categoria-section" data-categoria="pizzas">
-            <h2>🍕 Pizzas</h2>
+        <!-- Todos os Hambúrgueres -->
+        <section class="categoria-section">
+            <h2>🍔 Todos os Hambúrgueres</h2>
             <div class="produtos">
                 <article class="produto">
                     <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/calabresa.jpg" alt="Calabresa">
+                        <img src="https://exemplo.com/imagens/x-tudo.jpg" alt="X-Tudo">
                     </div>
-                    <h3>Calabresa</h3>
-                    <p>Preço: R$50,90</p>
-                    <button onclick="addToCart('PZ01', 'Pizza Calabresa', 50.90)">Adicionar</button>
+                    <h3>X-Tudo Clássico</h3>
+                    <p>Ingredientes: Pão, carne, alface, ovo, molhos, queijo</p>
+                    <p>Preço: R$18,90</p>
+                    <button onclick="addToCart('HB02', 'X-Tudo Clássico', 18.90)">Adicionar</button>
                 </article>
                 <article class="produto">
                     <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/frango-catupiry.jpg" alt="Frango + Catupiry">
+                        <img src="https://exemplo.com/imagens/x-salada.jpg" alt="X-Salada">
                     </div>
-                    <h3>Frango + Catupiry</h3>
-                    <p>Preço: R$65,50</p>
-                    <button onclick="addToCart('PZ02', 'Pizza Frango + Catupiry', 65.50)">Adicionar</button>
-                </article>
-                <article class="produto">
-                    <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/marguerita.jpg" alt="Marguerita">
-                    </div>
-                    <h3>Marguerita</h3>
-                    <p>Preço: R$56,90</p>
-                    <button onclick="addToCart('PZ03', 'Pizza Marguerita', 56.90)">Adicionar</button>
-                </article>
-                <article class="produto">
-                    <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/mucarela.jpg" alt="Muçarela">
-                    </div>
-                    <h3>Muçarela</h3>
-                    <p>Preço: R$50,00</p>
-                    <button onclick="addToCart('PZ04', 'Pizza Muçarela', 50.00)">Adicionar</button>
-                </article>
-                <article class="produto">
-                    <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/4-queijos.jpg" alt="4 Queijos">
-                    </div>
-                    <h3>4 Queijos</h3>
-                    <p>Preço: R$85,00</p>
-                    <button onclick="addToCart('PZ05', 'Pizza 4 Queijos', 85.00)">Adicionar</button>
+                    <h3>X-Salada Light</h3>
+                    <p>Ingredientes: Pão integral, frango grelhado, salada fresca</p>
+                    <p>Preço: R$16,90</p>
+                    <button onclick="addToCart('HB03', 'X-Salada Light', 16.90)">Adicionar</button>
                 </article>
             </div>
         </section>
 
-        <!-- Pastéis -->
-        <section class="categoria-section" data-categoria="pasteis">
-            <h2>😋 Pastéis</h2>
+        <!-- Bebidas -->
+        <section class="categoria-section">
+            <h2>🥤 Bebidas</h2>
             <div class="produtos">
                 <article class="produto">
                     <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/pastel-carne.jpg" alt="Carne">
+                        <img src="https://exemplo.com/imagens/coca-cola.jpg" alt="Coca-Cola">
                     </div>
-                    <h3>Carne</h3>
-                    <p>Preço: R$12,00</p>
-                    <button onclick="addToCart('PT01', 'Pastel de Carne', 12.00)">Adicionar</button>
-                </article>
-                <article class="produto">
-                    <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/pastel-carne-milho.jpg" alt="Carne + Milho">
-                    </div>
-                    <h3>Carne + Milho</h3>
-                    <p>Preço: R$14,00</p>
-                    <button onclick="addToCart('PT02', 'Pastel Carne + Milho', 14.00)">Adicionar</button>
-                </article>
-                <article class="produto">
-                    <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/pastel-queijo-presunto.jpg" alt="Queijo + Presunto">
-                    </div>
-                    <h3>Queijo + Presunto</h3>
-                    <p>Preço: R$16,00</p>
-                    <button onclick="addToCart('PT03', 'Pastel Queijo + Presunto', 16.00)">Adicionar</button>
-                </article>
-            </div>
-        </section>
-
-        <!-- Batata Frita -->
-        <section class="categoria-section" data-categoria="batatas">
-            <h2>🍟 Batata Frita</h2>
-            <div class="produtos">
-                <article class="produto">
-                    <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/batata-linguiça.jpg" alt="Batata + Linguiça">
-                    </div>
-                    <h3>Batata + Linguiça</h3>
-                    <p>Escolha o tamanho:</p>
-                    <button class="selecionar-peso" onclick="abrirModal('BT01', 'Batata + Linguiça', 15.50, 25.00)">Selecionar Peso</button>
-                </article>
-                <article class="produto">
-                    <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/batata-queijo-linguiça.jpg" alt="Batata + Queijo/Linguiça">
-                    </div>
-                    <h3>Batata + Queijo/Linguiça</h3>
-                    <p>Escolha o tamanho:</p>
-                    <button class="selecionar-peso" onclick="abrirModal('BT02', 'Batata + Queijo/Linguiça', 15.00, 35.00)">Selecionar Peso</button>
-                </article>
-                <article class="produto">
-                    <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/batata-bacon-linguiça.jpg" alt="Batata + Bacon/Linguiça">
-                    </div>
-                    <h3>Batata + Bacon/Linguiça</h3>
-                    <p>Escolha o tamanho:</p>
-                    <button class="selecionar-peso" onclick="abrirModal('BT03', 'Batata + Bacon/Linguiça', 16.90, 28.50)">Selecionar Peso</button>
-                </article>
-                <article class="produto">
-                    <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/batata-cheddar-bacon.jpg" alt="Batata + Cheddar/Bacon">
-                    </div>
-                    <h3>Batata + Cheddar/Bacon</h3>
-                    <p>Escolha o tamanho:</p>
-                    <button class="selecionar-peso" onclick="abrirModal('BT04', 'Batata + Cheddar/Bacon', 25.50, 35.90)">Selecionar Peso</button>
-                </article>
-                <article class="produto">
-                    <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/batata-frango.jpg" alt="Batata + Frango">
-                    </div>
-                    <h3>Batata + Frango</h3>
-                    <p>Escolha o tamanho:</p>
-                    <button class="selecionar-peso" onclick="abrirModal('BT05', 'Batata + Frango', 17.00, 21.00)">Selecionar Peso</button>
-                </article>
-                <article class="produto">
-                    <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/batata-alho.jpg" alt="Batata + Alho">
-                    </div>
-                    <h3>Batata + Alho</h3>
-                    <p>Escolha o tamanho:</p>
-                    <button class="selecionar-peso" onclick="abrirModal('BT06', 'Batata + Alho', 12.00, 24.00)">Selecionar Peso</button>
-                </article>
-            </div>
-        </section>
-
-        <!-- Refrigerantes -->
-        <section class="categoria-section" data-categoria="refrigerantes">
-            <h2>🥤 Refrigerantes</h2>
-            <div class="produtos">
-                <article class="produto">
-                    <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/coca-cola.jpg" alt="Coca-Cola 500ml">
-                    </div>
-                    <h3>Coca-Cola 500ml</h3>
-                    <p>Preço: R$6,50</p>
-                    <button onclick="addToCart('RF01', 'Coca-Cola 500ml', 6.50)">Adicionar</button>
-                </article>
-                <article class="produto">
-                    <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/guarana-antarctica.jpg" alt="Guaraná Antarctica">
-                    </div>
-                    <h3>Guaraná Antarctica</h3>
-                    <p>Preço: R$10,90</p>
-                    <button onclick="addToCart('RF02', 'Guaraná Antarctica', 10.90)">Adicionar</button>
-                </article>
-                <article class="produto">
-                    <div class="produto-imagem">
-                        <img src="https://exemplo.com/imagens/guaracamp.jpg" alt="Guaracamp">
-                    </div>
-                    <h3>Guaracamp</h3>
-                    <p>Preço: R$4,50</p>
-                    <button onclick="addToCart('RF03', 'Guaracamp', 4.50)">Adicionar</button>
+                    <h3>Coca-Cola 600ml</h3>
+                    <p>Bebida geladinha acompanha cubos de gelo</p>
+                    <p>Preço: R$8,00</p>
+                    <button onclick="addToCart('BB01', 'Coca-Cola 600ml', 8.00)">Adicionar</button>
                 </article>
             </div>
         </section>
     </main>
 
-    <!-- Modal para seleção de peso -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <h3 id="modal-titulo"></h3>
-            <button onclick="selecionarPeso(500)">500g</button>
-            <button onclick="selecionarPeso(1000)">1kg</button>
-            <button onclick="fecharModal()">Cancelar</button>
-        </div>
-    </div>
-
+    <!-- Carrinho -->
     <section class="carrinho">
         <h2>Seu Carrinho</h2>
         <div id="itens-carrinho"></div>
@@ -539,9 +343,10 @@
         </p>
     </section>
 
+    <!-- Formulário de Entrega -->
     <section class="carrinho">
         <h2>Dados para Entrega</h2>
-        <form id="form-entrega" onsubmit="return false;">
+        <form id="form-entrega" onsubmit="finalizarPedido(); return false;">
             <div class="input-group">
                 <label for="nome-completo">Nome Completo:</label>
                 <input type="text" id="nome-completo" required>
@@ -572,7 +377,7 @@
                 </select>
             </div>
             
-            <button onclick="finalizarPedido()">Finalizar Pedido</button>
+            <button type="submit">Finalizar Pedido</button>
         </form>
     </section>
 
@@ -581,51 +386,10 @@
         let shippingCost = 0;
         const storeCEP = '23030020';
 
-        // Variáveis para o modal de seleção de peso
-        let modal;
-        let itemAtual = { id: null, nome: null, preco500g: null, preco1kg: null };
-
         // Lista de bairros do RJ com valores de frete
         const fretePorBairro = {
             'Guaratiba': 12.00
         };
-
-        // Função para abrir o modal de seleção de peso
-        function abrirModal(id, nome, preco500g, preco1kg) {
-            itemAtual = { id, nome, preco500g, preco1kg };
-            modal = document.getElementById('modal');
-            document.getElementById('modal-titulo').textContent = nome;
-            modal.style.display = 'flex';
-        }
-
-        // Função para fechar o modal
-        function fecharModal() {
-            modal.style.display = 'none';
-        }
-
-        // Função para selecionar o peso e adicionar ao carrinho
-        function selecionarPeso(peso) {
-            const { id, nome, preco500g, preco1kg } = itemAtual;
-            const preco = peso === 500 ? preco500g : preco1kg;
-            const nomeCompleto = `${nome} ${peso === 500 ? '500g' : '1kg'}`;
-            addToCart(id, nomeCompleto, preco);
-            fecharModal();
-        }
-
-        // Função para filtrar categorias
-        function filtrarCategoria(categoria) {
-            document.querySelectorAll('.categoria-section').forEach(section => {
-                if(categoria === 'todos') {
-                    section.style.display = 'block';
-                } else {
-                    section.style.display = section.dataset.categoria === categoria ? 'block' : 'none';
-                }
-            });
-
-            document.querySelectorAll('.categoria-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.textContent.toLowerCase() === categoria);
-            });
-        }
 
         // Função para adicionar itens ao carrinho
         function addToCart(id, nome, preco) {
@@ -694,24 +458,10 @@
             setTimeout(() => feedback.remove(), 2000);
         }
 
-        // Função para validar campos do formulário
-        function validarCampos() {
-            const campos = ['nome-completo', 'telefone', 'cep', 'numero', 'pagamento'];
-            for(let campo of campos) {
-                const element = document.getElementById(campo);
-                if(!element.value) {
-                    showFeedback(`Preencha o campo: ${element.labels[0].textContent}`);
-                    element.focus();
-                    return false;
-                }
-            }
-            return true;
-        }
-
         // Função para calcular o frete
         function calcularFrete(bairroCliente) {
             const freteInfo = document.getElementById('frete-info');
-            const frete = fretePorBairro[bairroCliente] || Null;
+            const frete = fretePorBairro[bairroCliente] || 0;
             
             shippingCost = frete;
             freteInfo.innerHTML = `Frete calculado para: ${bairroCliente}`;
@@ -744,8 +494,6 @@
                 showFeedback('Seu carrinho está vazio!');
                 return;
             }
-
-            if(!validarCampos()) return;
 
             if(shippingCost === 0) {
                 showFeedback('Calcule o frete antes de finalizar!');
