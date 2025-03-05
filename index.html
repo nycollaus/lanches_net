@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LanchesNet</title>
     <style>
-        * {
+        /* Reset de margens e padding */
+        html, body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
+            height: 100%; /* Garante que o body ocupe 100% da altura da tela */
+            overflow-x: hidden; /* Evita rolagem horizontal */
         }
 
         body {
@@ -19,8 +20,9 @@
             background-position: center;
             background-attachment: fixed; /* Faz a imagem de fundo ficar estática */
             color: #fff;
-            min-height: 100vh;
+            min-height: 100vh; /* Garante que o body ocupe pelo menos 100% da altura da tela */
             padding: 10px;
+            box-sizing: border-box; /* Inclui o padding no cálculo da altura */
         }
 
         .logo {
@@ -333,49 +335,48 @@
     </section>
 
     <!-- Formulário de Entrega -->
-    <!-- Formulário de Entrega -->
-<section class="carrinho">
-    <h2>Dados para Entrega</h2>
-    <!-- Aviso sobre áreas de entrega -->
-    <div style="background: rgba(255, 107, 107, 0.2); padding: 10px; border-radius: 6px; margin-bottom: 15px;">
-        <p style="color: #ff6b6b; font-size: 0.9em; text-align: center;">
-            🚚 <strong>Áreas de Entrega:</strong> Atendemos apenas em <strong>Correia, Estrada do Mato Alto, Ilha de Guaratiba, Pedra e Piraquê</strong>.
-        </p>
-    </div>
-    <form id="form-entrega" onsubmit="finalizarPedido(); return false;">
-        <div class="input-group">
-            <label for="nome-completo">Nome Completo:</label>
-            <input type="text" id="nome-completo" required>
+    <section class="carrinho">
+        <h2>Dados para Entrega</h2>
+        <!-- Aviso sobre áreas de entrega -->
+        <div style="background: rgba(255, 107, 107, 0.2); padding: 10px; border-radius: 6px; margin-bottom: 15px;">
+            <p style="color: #ff6b6b; font-size: 0.9em; text-align: center;">
+                🚚 <strong>Áreas de Entrega:</strong> Atendemos apenas em <strong>Correia, Estrada do Mato Alto, Ilha de Guaratiba, Pedra e Piraquê</strong>.
+            </p>
         </div>
-        
-        <div class="input-group">
-            <label for="telefone">WhatsApp:</label>
-            <input type="tel" id="telefone" pattern="[0-9]{11}" placeholder="Ex: 21912345678" required>
-        </div>
-        
-        <div class="input-group">
-            <label for="cep">CEP:</label>
-            <input type="text" id="cep" placeholder="Ex: 22041001" required>
-        </div>
-        
-        <div class="input-group">
-            <label for="numero">Número da Casa:</label>
-            <input type="text" id="numero" required>
-        </div>
-        
-        <div class="input-group">
-            <label for="pagamento">Forma de Pagamento:</label>
-            <select id="pagamento" required>
-                <option value="">Selecione...</option>
-                <option value="Pix">Pix</option>
-                <option value="Cartão">Cartão</option>
-                <option value="Dinheiro">Dinheiro</option>
-            </select>
-        </div>
-        
-        <button type="submit">Finalizar Pedido</button>
-    </form>
-</section>
+        <form id="form-entrega" onsubmit="finalizarPedido(); return false;">
+            <div class="input-group">
+                <label for="nome-completo">Nome Completo:</label>
+                <input type="text" id="nome-completo" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="telefone">WhatsApp:</label>
+                <input type="tel" id="telefone" pattern="[0-9]{11}" placeholder="Ex: 21912345678" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="cep">CEP:</label>
+                <input type="text" id="cep" placeholder="Ex: 22041001" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="numero">Número da Casa:</label>
+                <input type="text" id="numero" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="pagamento">Forma de Pagamento:</label>
+                <select id="pagamento" required>
+                    <option value="">Selecione...</option>
+                    <option value="Pix">Pix</option>
+                    <option value="Cartão">Cartão</option>
+                    <option value="Dinheiro">Dinheiro</option>
+                </select>
+            </div>
+            
+            <button type="submit">Finalizar Pedido</button>
+        </form>
+    </section>
 
     <script>
         let carrinho = [];
