@@ -1,497 +1,84 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Street Burger - A Melhor Hamburgueria!</title>
+    <title>DeepSeek Chatbot</title>
     <style>
-        /* Reset básico */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(rgba(40, 40, 40, 0.95), rgba(40, 40, 40, 0.95)),
-                        url('https://img.freepik.com/vetores-premium/fundo-sem-costura-com-desenhos-de-fast-food-de-batatas-fritas-tomates-e-hamburgueres_604214-5342.jpg?w=1380');
-            background-size: cover;
-            background-position: center;
-            color: #fff;
-            min-height: 100vh;
+        #conversation {
+            border: 1px solid #ccc;
             padding: 10px;
-        }
-
-        .logo {
-            text-align: center;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            backdrop-filter: blur(5px); /* Reduzido para melhor desempenho */
-        }
-
-        .logo img {
-            max-width: 225px; /* Ajuste o tamanho do logo conforme necessário */
-            height: auto;
-        }
-
-        .logo p {
-            font-size: 1em;
-            color: #ddd;
-            font-family: 'Pacifico', cursive;
-            margin-top: 10px;
-        }
-
-        .promocao-banner {
-            background: #ff6b6b;
-            padding: 15px;
-            text-align: center;
-            margin-bottom: 15px;
-            border-radius: 10px;
-            font-family: 'Luckiest Guy', cursive;
-            font-size: 1.2em;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        }
-
-        .destaque-section, .carrinho {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            backdrop-filter: blur(5px); /* Reduzido para melhor desempenho */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .destaque-header h2 {
-            color: #ff9f43;
-            font-size: 1.8em;
-            font-family: 'Luckiest Guy', cursive;
-            letter-spacing: 1px;
-        }
-
-        .produtos-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .categoria-section h2 {
-            margin-bottom: 10px;
-            padding-left: 10px;
-            border-left: 4px solid #ff6b6b;
-            font-size: 1.5em;
-            color: #ff9f43;
-            font-family: 'Luckiest Guy', cursive;
-            letter-spacing: 1px;
-        }
-
-        .produtos {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
-        }
-
-        .produto {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease;
-        }
-
-        .produto:hover {
-            transform: translateY(-3px); /* Efeito mais leve */
-        }
-
-        .produto-imagem {
-            width: 100%;
-            height: 150px;
-            overflow: hidden;
-            border-radius: 10px 10px 0 0;
+            height: 300px;
+            overflow-y: scroll;
             margin-bottom: 10px;
         }
-
-        .produto-imagem img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 10px;
+        #user-input {
+            width: 80%;
         }
-
-        .produto h3 {
-            font-size: 1.2em;
-            margin-bottom: 5px;
-            color: #ff9f43;
-            font-family: 'Luckiest Guy', cursive;
-            letter-spacing: 1px;
-        }
-
-        .produto p {
-            font-size: 0.9em;
-            margin-bottom: 5px;
-            color: #ddd;
-        }
-
-        .produto button {
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            padding: 8px;
-            border-radius: 6px;
-            margin-top: 5px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 1em;
-            font-family: 'Luckiest Guy', cursive;
-            letter-spacing: 1px;
-            transition: background 0.2s ease;
-        }
-
-        .produto button:hover {
-            background: #ff9f43;
-        }
-
-        .carrinho h2 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-            color: #ff9f43;
-            font-family: 'Luckiest Guy', cursive;
-            letter-spacing: 1px;
-        }
-
-        #itens-carrinho div {
-            padding: 8px;
-            margin: 8px 0;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.9em;
-            color: #ddd;
-        }
-
-        .remove-btn {
-            background: none;
-            color: #ff6b6b;
-            padding: 4px;
-            margin-left: 8px;
-            width: auto;
-            font-size: 0.9em;
-            cursor: pointer;
-        }
-
-        .input-group {
-            margin-bottom: 10px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 4px;
-            font-weight: 500;
-            font-size: 0.9em;
-            color: #ddd;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 6px;
-            background: rgba(255, 255, 255, 0.9);
-            font-size: 0.9em;
-        }
-
-        button[type="submit"] {
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 6px;
-            margin-top: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            width: 100%;
-            font-size: 1em;
-            font-family: 'Luckiest Guy', cursive;
-            letter-spacing: 1px;
-        }
-
-        button[type="submit"]:hover {
-            background: #ff9f43;
+        #send-button {
+            width: 18%;
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Pacifico&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="logo">
-        <img src="STREETBURGER.png" alt="Street Burger Logo">
-        <p>Entregas em até 45 minutos!</p>
-    </header>
-
-    <!-- Seção de Promoção -->
-    <div class="promocao-banner">
-        <h3>🚨 PROMOÇÃO DO DIA! 🚨</h3>
-        <p>X queijo + Guaravita R$ 10,90!</p>
-    </div>
-
-    <main class="produtos-container">
-        <!-- Destaque Pinhais Hambúrgueres -->
-        <section class="destaque-section">
-            <div class="destaque-header">
-                <h2>MELHORES PREÇOS</h2>
-                <p>Limitado!</p>
-            </div>
-            <div class="produtos">
-    <article class="produto">
-        <div class="produto-imagem">
-            <img src="Xcasal.png" alt="X Casal" loading="lazy">
-        </div>
-        <h3>X Casal</h3>
-        <p>Cada Hambúrguer: 2x Guaravita, Alface, 4 Queijos, Tomate, 1x Carne, Mostarda</p>
-        <p>Preço: R$17,00</p>
-        <button onclick="addToCart('HB02', 'X Casal', 17.00)">Adicionar</button>
-    </article>
-    <article class="produto">
-        <div class="produto-imagem">
-            <img src="Xbravo.png" alt="X Bravo" loading="lazy">
-        </div>
-        <h3>X Bravo</h3>
-        <p>1x Guaravita, Alface, 4 Queijos, 1x Cheddar, Tomate, 2x Carne</p>
-        <p>Preço: R$12,36</p>
-        <button onclick="addToCart('HB03', 'X Bravo', 12.36)">Adicionar</button>
-    </article>
-</div>
-
-        <!-- Todos os Hambúrgueres -->
-        <section class="categoria-section">
-    <h2>🍔 Todos os Hambúrgueres</h2>
-    <div class="produtos">
-        <article class="produto">
-            <div class="produto-imagem">
-                <img src="Hambúrguersimples.png" alt="Hambúrguer Simples" loading="lazy">
-            </div>
-            <h3>Hambúrguer Simples</h3>
-            <p>Alface, Tomate, Carne</p>
-            <p>Preço: R$5,56</p>
-            <button onclick="addToCart('HB01', 'Hambúrguer Simples', 5.56)">Adicionar</button>
-        </article>
-        <article class="produto">
-            <div class="produto-imagem">
-                <img src="Hambúrguersimplescomqueijo.png" alt="Hambúrguer Simples de Queijo" loading="lazy">
-            </div>
-            <h3>Hambúrguer Simples de Queijo</h3>
-            <p>Alface, 4 Queijos, Tomate, Carne</p>
-            <p>Preço: R$6,07</p>
-            <button onclick="addToCart('HB02', 'Hambúrguer Simples de Queijo', 6.07)">Adicionar</button>
-        </article>
-        <article class="produto">
-            <div class="produto-imagem">
-                <img src="Xqueijo.png" alt="X-Queijo" loading="lazy">
-            </div>
-            <h3>X-Queijo</h3>
-            <p>Alface, 4 Queijos, Tomate, 2x Carne</p>
-            <p>Preço: R$8,45</p>
-            <button onclick="addToCart('HB03', 'X-Queijo', 8.45)">Adicionar</button>
-        </article>
-        <article class="produto">
-            <div class="produto-imagem">
-                <img src="Xcheddar.png" alt="X-Cheddar" loading="lazy">
-            </div>
-            <h3>X-Cheddar</h3>
-            <p>Alface, 2× Cheddar, Tomate, 2x Carne</p>
-            <p>Preço: R$11,20</p>
-            <button onclick="addToCart('HB04', 'X-Cheddar', 11.20)">Adicionar</button>
-        </article>
-        <article class="produto">
-            <div class="produto-imagem">
-                <img src="Hambúrguersimplescomcheddar.png" alt="X-Exagerado" loading="lazy">
-            </div>
-            <h3>Hambúrguer simples com cheddar</h3>
-            <p>Alface, 2x Cheddar, Tomate, Carne</p>
-            <p>Preço: R$7,30</p>
-            <button onclick="addToCart('HB05', 'Hambúrguer simples com cheddar', 7.30)">Adicionar</button>
-        </article>
-    </div>
-</section>
-
-        <!-- Bebidas -->
-        <section class="categoria-section">
-            <h2>🥤 Bebidas</h2>
-            <div class="produtos">
-                <article class="produto">
-                    <div class="produto-imagem">
-                        <img src="guaravita.png" alt="Guaravita" loading="lazy">
-                    </div>
-                    <h3>Guaravita 290ml</h3>
-                    <p>Bebida gelada</p>
-                    <p>Preço: R$3,50</p>
-                    <button onclick="addToCart('BB01', 'guaravita 290ml', 3.50)">Adicionar</button>
-                </article>
-            </div>
-        </section>
-    </main>
-
-    <!-- Carrinho -->
-    <section class="carrinho">
-        <h2>Seu Carrinho</h2>
-        <div id="itens-carrinho"></div>
-        <p style="margin: 10px 0; text-align: right;">
-            Subtotal: R$ <span id="subtotal">0,00</span><br>
-            Total: R$ <span id="total">0,00</span>
-        </p>
-    </section>
-
-    <!-- Formulário de Entrega -->
-    <section class="carrinho">
-        <h2>Dados para Entrega</h2>
-        <!-- Aviso sobre áreas de entrega -->
-        <div style="background: rgba(255, 107, 107, 0.2); padding: 10px; border-radius: 6px; margin-bottom: 15px;">
-            <p style="color: #ff6b6b; font-size: 0.9em; text-align: center;">
-                🚚 <strong>Áreas de Entrega:</strong> Atendemos apenas em <strong>Correia, Estrada do Mato Alto, Ilha de Guaratiba, Pedra e Piraquê</strong>.
-            </p>
-        </div>
-        <form id="form-entrega" onsubmit="finalizarPedido(); return false;">
-            <div class="input-group">
-                <label for="nome-completo">Nome Completo:</label>
-                <input type="text" id="nome-completo" required>
-            </div>
-            
-            <div class="input-group">
-                <label for="telefone">WhatsApp:</label>
-                <input type="tel" id="telefone" placeholder="Ex: 21912345678">
-            </div>
-            
-            <div class="input-group">
-                <label for="cep">CEP:</label>
-                <input type="text" id="cep" placeholder="Ex: 22041001" required>
-            </div>
-            
-            <div class="input-group">
-                <label for="numero">Número da Casa:</label>
-                <input type="text" id="numero" required>
-            </div>
-            
-            <div class="input-group">
-                <label for="pagamento">Forma de Pagamento:</label>
-                <select id="pagamento" required>
-                    <option value="">Selecione...</option>
-                    <option value="Pix">Pix</option>
-                    <option
-            <div>
-            
-            <button type="submit">Finalizar Pedido</button>
-        </form>
-    </section>
+    <div id="conversation"></div>
+    <input type="text" id="user-input" placeholder="Type your message...">
+    <button id="send-button">Send</button>
 
     <script>
-        let carrinho = [];
+        const API_KEY = "sk-b5c8d52f8b36404a83c333f337091df1";
+        const BASE_URL = "https://api.deepseek.com";
 
-        // Função para adicionar itens ao carrinho
-        function addToCart(id, nome, preco) {
-            const itemExistente = carrinho.find(item => item.id === id && item.nome === nome);
-            
-            if(itemExistente) {
-                itemExistente.quantidade++;
-            } else {
-                carrinho.push({id, nome, preco, quantidade: 1});
+        let messages = [
+            { role: "system", content: "You are a helpful assistant." }
+        ];
+
+        const conversationDiv = document.getElementById("conversation");
+        const userInput = document.getElementById("user-input");
+        const sendButton = document.getElementById("send-button");
+
+        sendButton.addEventListener("click", async () => {
+            const userMessage = userInput.value.trim();
+            if (userMessage === "") return;
+
+            messages.push({ role: "user", content: userMessage });
+            appendMessage("user", userMessage);
+
+            userInput.value = "";
+
+            try {
+                const response = await fetch(`${BASE_URL}/chat/completions`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${API_KEY}`
+                    },
+                    body: JSON.stringify({
+                        model: "deepseek-chat",
+                        messages: messages,
+                        stream: false
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const assistantMessage = data.choices[0].message.content;
+                messages.push({ role: "assistant", content: assistantMessage });
+                appendMessage("assistant", assistantMessage);
+            } catch (error) {
+                console.error("Error:", error);
+                appendMessage("system", "An error occurred. Please try again.");
             }
-            
-            atualizarCarrinho();
-            showFeedback('Item adicionado ao carrinho!');
-        }
+        });
 
-        // Função para atualizar o carrinho
-        function atualizarCarrinho() {
-            const container = document.getElementById('itens-carrinho');
-            const subtotalElement = document.getElementById('subtotal');
-            const totalElement = document.getElementById('total');
-            let html = '';
-            let subtotalValue = 0;
-
-            carrinho.forEach(item => {
-                subtotalValue += item.preco * item.quantidade;
-                html += `
-                    <div>
-                        <span>${item.nome}</span>
-                        <span>
-                            x${item.quantidade}
-                            <button class="remove-btn" onclick="removerItem('${item.id}', '${item.nome}')">❌</button>
-                        </span>
-                    </div>
-                `;
-            });
-
-            container.innerHTML = html;
-            
-            subtotalElement.textContent = subtotalValue.toFixed(2).replace('.', ',');
-            totalElement.textContent = subtotalValue.toFixed(2).replace('.', ',');
-        }
-
-        // Função para remover itens do carrinho
-        function removerItem(id, nome) {
-            carrinho = carrinho.filter(item => item.id !== id || item.nome !== nome);
-            atualizarCarrinho();
-            showFeedback('Item removido do carrinho!');
-        }
-
-        // Função para exibir feedback
-        function showFeedback(message) {
-            const feedback = document.createElement('div');
-            feedback.style.position = 'fixed';
-            feedback.style.bottom = '20px';
-            feedback.style.right = '20px';
-            feedback.style.backgroundColor = '#ff6b6b';
-            feedback.style.color = 'white';
-            feedback.style.padding = '15px 25px';
-            feedback.style.borderRadius = '8px';
-            feedback.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-            feedback.textContent = message;
-
-            document.body.appendChild(feedback);
-            setTimeout(() => feedback.remove(), 2000);
-        }
-
-        // Função para finalizar o pedido
-        function finalizarPedido() {
-            if(carrinho.length === 0) {
-                showFeedback('Seu carrinho está vazio!');
-                return;
-            }
-
-            const dados = {
-                nomeCompleto: document.getElementById('nome-completo').value,
-                telefone: document.getElementById('telefone').value,
-                cep: document.getElementById('cep').value,
-                numero: document.getElementById('numero').value,
-                pagamento: document.getElementById('pagamento').value
-            };
-
-            let mensagem = `*PEDIDO - Street Burger*%0A%0A`;
-            mensagem += `*DADOS DO CLIENTE*%0A`;
-            mensagem += `Nome: ${dados.nomeCompleto}%0A`;
-            mensagem += `Contato: ${dados.telefone}%0A`;
-            mensagem += `Endereço: CEP ${dados.cep} - Nº ${dados.numero}%0A%0A`;
-            mensagem += `*FORMA DE PAGAMENTO*%0A`;
-            mensagem += `${dados.pagamento}%0A%0A`;
-            mensagem += `*ITENS DO PEDIDO*%0A`;
-
-            carrinho.forEach((item, index) => {
-                mensagem += `----------------------------%0A`;
-                mensagem += `Item ${index + 1}%0A`;
-                mensagem += `Nome: ${item.nome}%0A`;
-                mensagem += `Quantidade: ${item.quantidade}%0A`;
-                mensagem += `Valor: R$ ${(item.preco * item.quantidade).toFixed(2)}%0A`;
-            });
-
-            mensagem += `%0A----------------------------%0A`;
-            mensagem += `*SUBTOTAL: R$ ${document.getElementById('subtotal').textContent}*%0A`;
-            mensagem += `*TOTAL: R$ ${document.getElementById('total').textContent}*%0A%0A`;
-            mensagem += `Pedido pronto para confirmação!`;
-
-            const linkWhatsApp = `https://wa.me/5521980241228?text=${mensagem}`;
-            window.open(linkWhatsApp, '_blank');
+        function appendMessage(role, content) {
+            const messageElement = document.createElement("div");
+            messageElement.textContent = `${role}: ${content}`;
+            conversationDiv.appendChild(messageElement);
+            conversationDiv.scrollTop = conversationDiv.scrollHeight;
         }
     </script>
 </body>
