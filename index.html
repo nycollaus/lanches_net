@@ -3,9 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Street Burger - A Melhor Hamburgueria!</title>
+    <meta name="description" content="Street Burger - A melhor hamburgueria de Guaratiba! Hamburgers artesanais, promoções imperdíveis e delivery rápido.">
+    <title>Street Burger - A Melhor Hamburgueria de Guaratiba!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reset básico */
+        :root {
+            --primary: #FF6B00;
+            --secondary: #FF9F43;
+            --dark: #1E1E1E;
+            --light: #F8F8F8;
+            --success: #28A745;
+            --danger: #DC3545;
+            --warning: #FFC107;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,485 +29,1315 @@
         }
 
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(rgba(40, 40, 40, 0.95), rgba(40, 40, 40, 0.95)),
-                        url('https://img.freepik.com/vetores-premium/fundo-sem-costura-com-desenhos-de-fast-food-de-batatas-fritas-tomates-e-hamburgueres_604214-5342.jpg?w=1380');
-            background-size: cover;
-            background-position: center;
-            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
             min-height: 100vh;
-            padding: 10px;
+            position: relative;
+        }
+
+        /* Header */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(30, 30, 30, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
         }
 
         .logo {
-            text-align: center;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            backdrop-filter: blur(5px); /* Reduzido para melhor desempenho */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
         }
 
         .logo img {
-            max-width: 225px; /* Ajuste o tamanho do logo conforme necessário */
+            max-width: 180px;
             height: auto;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
 
-        .logo p {
-            font-size: 1em;
-            color: #ddd;
+        .logo-text {
             font-family: 'Pacifico', cursive;
-            margin-top: 10px;
+            color: var(--secondary);
+            font-size: 1.2rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        .promocao-banner {
-            background: #ff6b6b;
-            padding: 15px;
+        .delivery-info {
             text-align: center;
-            margin-bottom: 15px;
-            border-radius: 10px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 5px;
+        }
+
+        /* Promo Banner */
+        .promo-banner {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 12px;
+            text-align: center;
+            margin: 10px 0;
+            border-radius: 8px;
             font-family: 'Luckiest Guy', cursive;
-            font-size: 1.2em;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        }
-
-        .destaque-section, .carrinho {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            backdrop-filter: blur(5px); /* Reduzido para melhor desempenho */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .destaque-header h2 {
-            color: #ff9f43;
-            font-size: 1.8em;
-            font-family: 'Luckiest Guy', cursive;
-            letter-spacing: 1px;
-        }
-
-        .produtos-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .categoria-section h2 {
-            margin-bottom: 10px;
-            padding-left: 10px;
-            border-left: 4px solid #ff6b6b;
-            font-size: 1.5em;
-            color: #ff9f43;
-            font-family: 'Luckiest Guy', cursive;
-            letter-spacing: 1px;
-        }
-
-        .produtos {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
-        }
-
-        .produto {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease;
-        }
-
-        .produto:hover {
-            transform: translateY(-3px); /* Efeito mais leve */
-        }
-
-        .produto-imagem {
-            width: 100%;
-            height: 150px;
+            font-size: 1.1rem;
+            box-shadow: var(--shadow);
+            animation: pulse 2s infinite;
+            position: relative;
             overflow: hidden;
-            border-radius: 10px 10px 0 0;
-            margin-bottom: 10px;
         }
 
-        .produto-imagem img {
+        .promo-banner::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 255, 255, 0.3) 0%,
+                rgba(255, 255, 255, 0) 60%
+            );
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shine {
+            0% { left: -50%; }
+            100% { left: 150%; }
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            padding-bottom: 100px;
+        }
+
+        @media (min-width: 992px) {
+            .main-content {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        /* Menu Section */
+        .menu-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-family: 'Luckiest Guy', cursive;
+            color: var(--secondary);
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .section-title i {
+            font-size: 1.3rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 15px;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 140px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 12px;
+        }
+
+        .product-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .product-description {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-price {
+            font-weight: 700;
+            color: var(--secondary);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .add-to-cart {
+            flex: 1;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .add-to-cart:hover {
+            background: var(--secondary);
+        }
+
+        .quick-view {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quick-view:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            background: rgba(40, 40, 40, 0.9);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        .cart-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .cart-title {
+            font-family: 'Luckiest Guy', cursive;
+            color: var(--secondary);
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+        }
+
+        .cart-count {
+            background: var(--primary);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .cart-items {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) rgba(255, 255, 255, 0.1);
+        }
+
+        .cart-items::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .cart-items::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
         }
 
-        .produto h3 {
-            font-size: 1.2em;
-            margin-bottom: 5px;
-            color: #ff9f43;
-            font-family: 'Luckiest Guy', cursive;
-            letter-spacing: 1px;
+        .cart-items::-webkit-scrollbar-thumb {
+            background-color: var(--primary);
+            border-radius: 10px;
         }
 
-        .produto p {
-            font-size: 0.9em;
-            margin-bottom: 5px;
-            color: #ddd;
-        }
-
-        .produto button {
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            padding: 8px;
-            border-radius: 6px;
-            margin-top: 5px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 1em;
-            font-family: 'Luckiest Guy', cursive;
-            letter-spacing: 1px;
-            transition: background 0.2s ease;
-        }
-
-        .produto button:hover {
-            background: #ff9f43;
-        }
-
-        .carrinho h2 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-            color: #ff9f43;
-            font-family: 'Luckiest Guy', cursive;
-            letter-spacing: 1px;
-        }
-
-        #itens-carrinho div {
-            padding: 8px;
-            margin: 8px 0;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
+        .cart-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.9em;
-            color: #ddd;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .cart-item-name {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .cart-item-price {
+            font-size: 0.9rem;
+            color: var(--secondary);
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .quantity-btn {
+            width: 24px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .quantity-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .remove-btn {
+            color: var(--danger);
             background: none;
-            color: #ff6b6b;
-            padding: 4px;
-            margin-left: 8px;
-            width: auto;
-            font-size: 0.9em;
-            cursor: pointer;
-        }
-
-        .input-group {
-            margin-bottom: 10px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 4px;
-            font-weight: 500;
-            font-size: 0.9em;
-            color: #ddd;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 10px;
             border: none;
-            border-radius: 6px;
-            background: rgba(255, 255, 255, 0.9);
-            font-size: 0.9em;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: var(--transition);
         }
 
-        button[type="submit"] {
-            background: #ff6b6b;
+        .remove-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .cart-summary {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .summary-label {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .summary-value {
+            font-weight: 600;
+        }
+
+        .total-row {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: var(--primary);
             color: white;
             border: none;
-            padding: 10px;
-            border-radius: 6px;
-            margin-top: 8px;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .checkout-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .checkout-btn:disabled {
+            background: rgba(255, 255, 255, 0.1);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Delivery Form */
+        .delivery-form {
+            background: rgba(40, 40, 40, 0.9);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-title {
+            font-family: 'Luckiest Guy', cursive;
+            color: var(--secondary);
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .delivery-notice {
+            background: rgba(255, 107, 107, 0.2);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--danger);
+        }
+
+        .delivery-notice p {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
             width: 100%;
-            font-size: 1em;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background: var(--secondary);
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--dark);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
             font-family: 'Luckiest Guy', cursive;
             letter-spacing: 1px;
         }
 
-        button[type="submit"]:hover {
-            background: #ff9f43;
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-product {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .modal-product-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .modal-product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-product-info {
+            flex: 1;
+        }
+
+        .modal-product-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        .modal-product-price {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .modal-product-description {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 15px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Floating Cart Button */
+        .floating-cart-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            z-index: 99;
+            transition: var(--transition);
+        }
+
+        .floating-cart-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .logo img {
+                max-width: 150px;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            }
+            
+            .product-image {
+                height: 120px;
+            }
+            
+            .modal-product {
+                flex-direction: column;
+            }
+            
+            .modal-product-image {
+                width: 100%;
+                height: 200px;
+            }
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Pacifico&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="logo">
-        <img src="STREETBURGER.png" alt="Street Burger Logo">
-        <p>Entregas em até 45 minutos!</p>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="STREETBURGER.png" alt="Street Burger Logo">
+                <span class="logo-text">Street Burger</span>
+            </div>
+            <p class="delivery-info">Entregas rápidas em Guaratiba • 45min ou menos</p>
+        </div>
     </header>
 
-    <!-- Seção de Promoção -->
-    <div class="promocao-banner">
-        <h3>🚨 PROMOÇÃO DO DIA! 🚨</h3>
-        <p>X queijo + Guaravita R$ 10,90!</p>
-    </div>
-
-    <main class="produtos-container">
-        <!-- Destaque Pinhais Hambúrgueres -->
-        <section class="destaque-section">
-            <div class="destaque-header">
-                <h2>MELHORES PREÇOS</h2>
-                <p>Limitado!</p>
-            </div>
-            <div class="produtos">
-    <article class="produto">
-        <div class="produto-imagem">
-            <img src="Xcasal.png" alt="X Casal" loading="lazy">
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Promo Banner -->
+        <div class="promo-banner">
+            <i class="fas fa-fire"></i> PROMOÇÃO DO DIA! X-Queijo + Guaravita R$ 10,90! <i class="fas fa-fire"></i>
         </div>
-        <h3>X Casal</h3>
-        <p>Cada Hambúrguer: 2x Guaravita, Alface, 4 Queijos, Tomate, 1x Carne, Mostarda</p>
-        <p>Preço: R$17,00</p>
-        <button onclick="addToCart('HB02', 'X Casal', 17.00)">Adicionar</button>
-    </article>
-    <article class="produto">
-        <div class="produto-imagem">
-            <img src="Xbravo.png" alt="X Bravo" loading="lazy">
-        </div>
-        <h3>X Bravo</h3>
-        <p>1x Guaravita, Alface, 4 Queijos, 1x Cheddar, Tomate, 2x Carne</p>
-        <p>Preço: R$12,36</p>
-        <button onclick="addToCart('HB03', 'X Bravo', 12.36)">Adicionar</button>
-    </article>
-</div>
 
-        <!-- Todos os Hambúrgueres -->
-        <section class="categoria-section">
-    <h2>🍔 Todos os Hambúrgueres</h2>
-    <div class="produtos">
-        <article class="produto">
-            <div class="produto-imagem">
-                <img src="Hambúrguersimples.png" alt="Hambúrguer Simples" loading="lazy">
-            </div>
-            <h3>Hambúrguer Simples</h3>
-            <p>Alface, Tomate, Carne</p>
-            <p>Preço: R$5,56</p>
-            <button onclick="addToCart('HB01', 'Hambúrguer Simples', 5.56)">Adicionar</button>
-        </article>
-        <article class="produto">
-            <div class="produto-imagem">
-                <img src="Hambúrguersimplescomqueijo.png" alt="Hambúrguer Simples de Queijo" loading="lazy">
-            </div>
-            <h3>Hambúrguer Simples de Queijo</h3>
-            <p>Alface, 4 Queijos, Tomate, Carne</p>
-            <p>Preço: R$6,07</p>
-            <button onclick="addToCart('HB02', 'Hambúrguer Simples de Queijo', 6.07)">Adicionar</button>
-        </article>
-        <article class="produto">
-            <div class="produto-imagem">
-                <img src="Xqueijo.png" alt="X-Queijo" loading="lazy">
-            </div>
-            <h3>X-Queijo</h3>
-            <p>Alface, 4 Queijos, Tomate, 2x Carne</p>
-            <p>Preço: R$8,45</p>
-            <button onclick="addToCart('HB03', 'X-Queijo', 8.45)">Adicionar</button>
-        </article>
-        <article class="produto">
-            <div class="produto-imagem">
-                <img src="Xcheddar.png" alt="X-Cheddar" loading="lazy">
-            </div>
-            <h3>X-Cheddar</h3>
-            <p>Alface, 2× Cheddar, Tomate, 2x Carne</p>
-            <p>Preço: R$11,20</p>
-            <button onclick="addToCart('HB04', 'X-Cheddar', 11.20)">Adicionar</button>
-        </article>
-        <article class="produto">
-            <div class="produto-imagem">
-                <img src="Hambúrguersimplescomcheddar.png" alt="X-Exagerado" loading="lazy">
-            </div>
-            <h3>Hambúrguer simples com cheddar</h3>
-            <p>Alface, 2x Cheddar, Tomate, Carne</p>
-            <p>Preço: R$7,30</p>
-            <button onclick="addToCart('HB05', 'Hambúrguer simples com cheddar', 7.30)">Adicionar</button>
-        </article>
-    </div>
-</section>
-
-        <!-- Bebidas -->
-        <section class="categoria-section">
-            <h2>🥤 Bebidas</h2>
-            <div class="produtos">
-                <article class="produto">
-                    <div class="produto-imagem">
-                        <img src="guaravita.png" alt="Guaravita" loading="lazy">
+        <div class="main-content">
+            <!-- Menu Section -->
+            <div class="menu-section">
+                <!-- Destaques -->
+                <div class="section-title">
+                    <i class="fas fa-crown"></i>
+                    <h2>DESTAQUES</h2>
+                </div>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-badge">Mais vendido</div>
+                        <div class="product-image">
+                            <img src="Xcasal.png" alt="X Casal" loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">X Casal</h3>
+                            <p class="product-description">2x Guaravita, Alface, 4 Queijos, Tomate, 1x Carne, Mostarda</p>
+                            <p class="product-price">R$ 17,00</p>
+                            <div class="product-actions">
+                                <button class="add-to-cart" onclick="addToCart('HB02', 'X Casal', 17.00)">
+                                    <i class="fas fa-plus"></i> Adicionar
+                                </button>
+                                <button class="quick-view" onclick="openQuickView('HB02', 'X Casal', 17.00, '2x Guaravita, Alface, 4 Queijos, Tomate, 1x Carne, Mostarda', 'Xcasal.png')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <h3>Guaravita 290ml</h3>
-                    <p>Bebida gelada</p>
-                    <p>Preço: R$3,50</p>
-                    <button onclick="addToCart('BB01', 'guaravita 290ml', 3.50)">Adicionar</button>
-                </article>
+
+                    <div class="product-card">
+                        <div class="product-badge">Promoção</div>
+                        <div class="product-image">
+                            <img src="Xbravo.png" alt="X Bravo" loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">X Bravo</h3>
+                            <p class="product-description">1x Guaravita, Alface, 4 Queijos, 1x Cheddar, Tomate, 2x Carne</p>
+                            <p class="product-price">R$ 12,36</p>
+                            <div class="product-actions">
+                                <button class="add-to-cart" onclick="addToCart('HB03', 'X Bravo', 12.36)">
+                                    <i class="fas fa-plus"></i> Adicionar
+                                </button>
+                                <button class="quick-view" onclick="openQuickView('HB03', 'X Bravo', 12.36, '1x Guaravita, Alface, 4 Queijos, 1x Cheddar, Tomate, 2x Carne', 'Xbravo.png')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hamburgers -->
+                <div class="section-title">
+                    <i class="fas fa-hamburger"></i>
+                    <h2>TODOS OS HAMBÚRGUERES</h2>
+                </div>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="Hambúrguersimples.png" alt="Hambúrguer Simples" loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Hambúrguer Simples</h3>
+                            <p class="product-description">Alface, Tomate, Carne</p>
+                            <p class="product-price">R$ 5,56</p>
+                            <div class="product-actions">
+                                <button class="add-to-cart" onclick="addToCart('HB01', 'Hambúrguer Simples', 5.56)">
+                                    <i class="fas fa-plus"></i> Adicionar
+                                </button>
+                                <button class="quick-view" onclick="openQuickView('HB01', 'Hambúrguer Simples', 5.56, 'Alface, Tomate, Carne', 'Hambúrguersimples.png')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="Hambúrguersimplescomqueijo.png" alt="Hambúrguer Simples de Queijo" loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Hambúrguer Simples de Queijo</h3>
+                            <p class="product-description">Alface, 4 Queijos, Tomate, Carne</p>
+                            <p class="product-price">R$ 6,07</p>
+                            <div class="product-actions">
+                                <button class="add-to-cart" onclick="addToCart('HB02', 'Hambúrguer Simples de Queijo', 6.07)">
+                                    <i class="fas fa-plus"></i> Adicionar
+                                </button>
+                                <button class="quick-view" onclick="openQuickView('HB02', 'Hambúrguer Simples de Queijo', 6.07, 'Alface, 4 Queijos, Tomate, Carne', 'Hambúrguersimplescomqueijo.png')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="Xqueijo.png" alt="X-Queijo" loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">X-Queijo</h3>
+                            <p class="product-description">Alface, 4 Queijos, Tomate, 2x Carne</p>
+                            <p class="product-price">R$ 8,45</p>
+                            <div class="product-actions">
+                                <button class="addToCart" onclick="addToCart('HB03', 'X-Queijo', 8.45)">
+                                    <i class="fas fa-plus"></i> Adicionar
+                                </button>
+                                <button class="quick-view" onclick="openQuickView('HB03', 'X-Queijo', 8.45, 'Alface, 4 Queijos, Tomate, 2x Carne', 'Xqueijo.png')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="Xcheddar.png" alt="X-Cheddar" loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">X-Cheddar</h3>
+                            <p class="product-description">Alface, 2× Cheddar, Tomate, 2x Carne</p>
+                            <p class="product-price">R$ 11,20</p>
+                            <div class="product-actions">
+                                <button class="add-to-cart" onclick="addToCart('HB04', 'X-Cheddar', 11.20)">
+                                    <i class="fas fa-plus"></i> Adicionar
+                                </button>
+                                <button class="quick-view" onclick="openQuickView('HB04', 'X-Cheddar', 11.20, 'Alface, 2× Cheddar, Tomate, 2x Carne', 'Xcheddar.png')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="Hambúrguersimplescomcheddar.png" alt="Hambúrguer simples com cheddar" loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Hambúrguer com Cheddar</h3>
+                            <p class="product-description">Alface, 2x Cheddar, Tomate, Carne</p>
+                            <p class="product-price">R$ 7,30</p>
+                            <div class="product-actions">
+                                <button class="add-to-cart" onclick="addToCart('HB05', 'Hambúrguer simples com cheddar', 7.30)">
+                                    <i class="fas fa-plus"></i> Adicionar
+                                </button>
+                                <button class="quick-view" onclick="openQuickView('HB05', 'Hambúrguer simples com cheddar', 7.30, 'Alface, 2x Cheddar, Tomate, Carne', 'Hambúrguersimplescomcheddar.png')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bebidas -->
+                <div class="section-title">
+                    <i class="fas fa-glass-whiskey"></i>
+                    <h2>BEBIDAS</h2>
+                </div>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="guaravita.png" alt="Guaravita" loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">Guaravita 290ml</h3>
+                            <p class="product-description">Bebida gelada e refrescante</p>
+                            <p class="product-price">R$ 3,50</p>
+                            <div class="product-actions">
+                                <button class="add-to-cart" onclick="addToCart('BB01', 'Guaravita 290ml', 3.50)">
+                                    <i class="fas fa-plus"></i> Adicionar
+                                </button>
+                                <button class="quick-view" onclick="openQuickView('BB01', 'Guaravita 290ml', 3.50, 'Bebida gelada e refrescante', 'guaravita.png')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section>
-    </main>
 
-    <!-- Carrinho -->
-    <section class="carrinho">
-        <h2>Seu Carrinho</h2>
-        <div id="itens-carrinho"></div>
-        <p style="margin: 10px 0; text-align: right;">
-            Subtotal: R$ <span id="subtotal">0,00</span><br>
-            Total: R$ <span id="total">0,00</span>
-        </p>
-    </section>
-
-    <!-- Formulário de Entrega -->
-    <section class="carrinho">
-        <h2>Dados para Entrega</h2>
-        <!-- Aviso sobre áreas de entrega -->
-        <div style="background: rgba(255, 107, 107, 0.2); padding: 10px; border-radius: 6px; margin-bottom: 15px;">
-            <p style="color: #ff6b6b; font-size: 0.9em; text-align: center;">
-                🚚 <strong>Áreas de Entrega:</strong> Atendemos apenas em <strong>Correia, Estrada do Mato Alto, Ilha de Guaratiba, Pedra e Piraquê</strong>.
-            </p>
+            <!-- Cart Sidebar -->
+            <div class="cart-sidebar">
+                <div class="cart-header">
+                    <h2 class="cart-title">Seu Carrinho</h2>
+                    <div class="cart-count" id="cart-count">0</div>
+                </div>
+                
+                <div class="cart-items" id="cart-items">
+                    <!-- Itens do carrinho serão adicionados aqui via JavaScript -->
+                    <div style="text-align: center; padding: 20px; color: rgba(255,255,255,0.5);">
+                        <i class="fas fa-shopping-cart" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                        <p>Seu carrinho está vazio</p>
+                    </div>
+                </div>
+                
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span class="summary-label">Subtotal:</span>
+                        <span class="summary-value" id="subtotal">R$ 0,00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Taxa de Entrega:</span>
+                        <span class="summary-value">R$ 3,00</span>
+                    </div>
+                    <div class="summary-row total-row">
+                        <span>Total:</span>
+                        <span id="total">R$ 0,00</span>
+                    </div>
+                </div>
+                
+                <button class="checkout-btn" id="checkout-btn" disabled onclick="openDeliveryForm()">
+                    <i class="fas fa-shopping-bag"></i> Finalizar Pedido
+                </button>
+            </div>
         </div>
-        <form id="form-entrega" onsubmit="finalizarPedido(); return false;">
-            <div class="input-group">
-                <label for="nome-completo">Nome Completo:</label>
-                <input type="text" id="nome-completo" required>
+    </div>
+
+    <!-- Delivery Form Modal -->
+    <div class="modal" id="delivery-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Finalizar Pedido</h3>
+                <button class="modal-close" onclick="closeModal('delivery-modal')">&times;</button>
             </div>
-            
-            <div class="input-group">
-                <label for="telefone">WhatsApp:</label>
-                <input type="tel" id="telefone" placeholder="Ex: 21912345678">
+            <div class="modal-body">
+                <div class="delivery-form">
+                    <h3 class="form-title">Dados para Entrega</h3>
+                    <div class="delivery-notice">
+                        <p><i class="fas fa-truck"></i> <strong>Áreas de Entrega:</strong> Atendemos apenas em <strong>Correia, Estrada do Mato Alto, Ilha de Guaratiba, Pedra e Piraquê</strong>.</p>
+                    </div>
+                    
+                    <form id="delivery-form" onsubmit="finalizarPedido(event)">
+                        <div class="form-group">
+                            <label for="nome-completo" class="form-label">Nome Completo:</label>
+                            <input type="text" id="nome-completo" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="telefone" class="form-label">WhatsApp:</label>
+                            <input type="tel" id="telefone" class="form-control" placeholder="Ex: 21912345678" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="endereco" class="form-label">Endereço:</label>
+                            <input type="text" id="endereco" class="form-control" placeholder="Rua, Avenida, etc." required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="numero" class="form-label">Número:</label>
+                            <input type="text" id="numero" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="complemento" class="form-label">Complemento:</label>
+                            <input type="text" id="complemento" class="form-control" placeholder="Opcional">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="pagamento" class="form-label">Forma de Pagamento:</label>
+                            <select id="pagamento" class="form-control" required>
+                                <option value="">Selecione...</option>
+                                <option value="Pix">Pix</option>
+                                <option value="Dinheiro">Dinheiro</option>
+                                <option value="Cartão de Crédito">Cartão de Crédito</option>
+                                <option value="Cartão de Débito">Cartão de Débito</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="observacoes" class="form-label">Observações:</label>
+                            <textarea id="observacoes" class="form-control" rows="3" placeholder="Alguma observação sobre seu pedido?"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn" id="submit-order-btn">
+                            <i class="fas fa-paper-plane"></i> Enviar Pedido
+                        </button>
+                    </form>
+                </div>
             </div>
-            
-            <div class="input-group">
-                <label for="cep">CEP:</label>
-                <input type="text" id="cep" placeholder="Ex: 22041001" required>
+        </div>
+    </div>
+
+    <!-- Product Quick View Modal -->
+    <div class="modal" id="quick-view-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Detalhes do Produto</h3>
+                <button class="modal-close" onclick="closeModal('quick-view-modal')">&times;</button>
             </div>
-            
-            <div class="input-group">
-                <label for="numero">Número da Casa:</label>
-                <input type="text" id="numero" required>
+            <div class="modal-body">
+                <div class="modal-product">
+                    <div class="modal-product-image">
+                        <img id="quick-view-image" src="" alt="">
+                    </div>
+                    <div class="modal-product-info">
+                        <h3 class="modal-product-name" id="quick-view-name"></h3>
+                        <p class="modal-product-price" id="quick-view-price"></p>
+                        <p class="modal-product-description" id="quick-view-description"></p>
+                        <div class="modal-actions">
+                            <button class="add-to-cart" id="quick-view-add-to-cart">
+                                <i class="fas fa-plus"></i> Adicionar ao Carrinho
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <div class="input-group">
-                <label for="pagamento">Forma de Pagamento:</label>
-                <select id="pagamento" required>
-                    <option value="">Selecione...</option>
-                    <option value="Pix">Pix</option>
-                    <option
-            <div>
-            
-            <button type="submit">Finalizar Pedido</button>
-        </form>
-    </section>
+        </div>
+    </div>
+
+    <!-- Floating Cart Button -->
+    <div class="floating-cart-btn" onclick="openDeliveryForm()">
+        <i class="fas fa-shopping-bag"></i>
+        <div class="cart-badge" id="floating-cart-count">0</div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle toast-icon"></i>
+        <span id="toast-message">Item adicionado ao carrinho!</span>
+    </div>
 
     <script>
-        let carrinho = [];
+        // Variáveis globais
+        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+        let currentProduct = null;
+        const DELIVERY_FEE = 3.00;
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            atualizarCarrinho();
+        });
 
         // Função para adicionar itens ao carrinho
         function addToCart(id, nome, preco) {
-            const itemExistente = carrinho.find(item => item.id === id && item.nome === nome);
+            const itemExistente = carrinho.find(item => item.id === id);
             
             if(itemExistente) {
                 itemExistente.quantidade++;
             } else {
-                carrinho.push({id, nome, preco, quantidade: 1});
+                carrinho.push({
+                    id,
+                    nome,
+                    preco,
+                    quantidade: 1
+                });
             }
             
+            salvarCarrinho();
             atualizarCarrinho();
-            showFeedback('Item adicionado ao carrinho!');
+            showToast('Item adicionado ao carrinho!');
         }
 
-        // Função para atualizar o carrinho
+        // Função para remover item do carrinho
+        function removeFromCart(id) {
+            carrinho = carrinho.filter(item => item.id !== id);
+            salvarCarrinho();
+            atualizarCarrinho();
+            showToast('Item removido do carrinho!');
+        }
+
+        // Função para atualizar quantidade
+        function updateQuantity(id, change) {
+            const item = carrinho.find(item => item.id === id);
+            
+            if(item) {
+                item.quantidade += change;
+                
+                if(item.quantidade < 1) {
+                    removeFromCart(id);
+                    return;
+                }
+                
+                salvarCarrinho();
+                atualizarCarrinho();
+            }
+        }
+
+        // Função para salvar carrinho no localStorage
+        function salvarCarrinho() {
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        }
+
+        // Função para atualizar a exibição do carrinho
         function atualizarCarrinho() {
-            const container = document.getElementById('itens-carrinho');
+            const cartItemsContainer = document.getElementById('cart-items');
             const subtotalElement = document.getElementById('subtotal');
             const totalElement = document.getElementById('total');
+            const cartCountElements = document.querySelectorAll('.cart-count, #floating-cart-count');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            
+            let subtotal = 0;
             let html = '';
-            let subtotalValue = 0;
-
-            carrinho.forEach(item => {
-                subtotalValue += item.preco * item.quantidade;
-                html += `
-                    <div>
-                        <span>${item.nome}</span>
-                        <span>
-                            x${item.quantidade}
-                            <button class="remove-btn" onclick="removerItem('${item.id}', '${item.nome}')">❌</button>
-                        </span>
+            
+            if(carrinho.length === 0) {
+                html = `
+                    <div style="text-align: center; padding: 20px; color: rgba(255,255,255,0.5);">
+                        <i class="fas fa-shopping-cart" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                        <p>Seu carrinho está vazio</p>
                     </div>
                 `;
-            });
-
-            container.innerHTML = html;
+                checkoutBtn.disabled = true;
+            } else {
+                carrinho.forEach(item => {
+                    const itemTotal = item.preco * item.quantidade;
+                    subtotal += itemTotal;
+                    
+                    html += `
+                        <div class="cart-item">
+                            <div>
+                                <div class="cart-item-name">${item.nome}</div>
+                                <div class="cart-item-price">R$ ${item.preco.toFixed(2).replace('.', ',')}</div>
+                            </div>
+                            <div class="cart-item-actions">
+                                <div class="cart-item-quantity">
+                                    <button class="quantity-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
+                                    <span>${item.quantidade}</span>
+                                    <button class="quantity-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
+                                </div>
+                                <button class="remove-btn" onclick="removeFromCart('${item.id}')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                checkoutBtn.disabled = false;
+            }
             
-            subtotalElement.textContent = subtotalValue.toFixed(2).replace('.', ',');
-            totalElement.textContent = subtotalValue.toFixed(2).replace('.', ',');
+            cartItemsContainer.innerHTML = html;
+            subtotalElement.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')`;
+            totalElement.textContent = `R$ ${(subtotal + DELIVERY_FEE).toFixed(2).replace('.', ',')`;
+            
+            // Atualizar contadores
+            const totalItems = carrinho.reduce((total, item) => total + item.quantidade, 0);
+            cartCountElements.forEach(el => el.textContent = totalItems);
         }
 
-        // Função para remover itens do carrinho
-        function removerItem(id, nome) {
-            carrinho = carrinho.filter(item => item.id !== id || item.nome !== nome);
-            atualizarCarrinho();
-            showFeedback('Item removido do carrinho!');
-        }
-
-        // Função para exibir feedback
-        function showFeedback(message) {
-            const feedback = document.createElement('div');
-            feedback.style.position = 'fixed';
-            feedback.style.bottom = '20px';
-            feedback.style.right = '20px';
-            feedback.style.backgroundColor = '#ff6b6b';
-            feedback.style.color = 'white';
-            feedback.style.padding = '15px 25px';
-            feedback.style.borderRadius = '8px';
-            feedback.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-            feedback.textContent = message;
-
-            document.body.appendChild(feedback);
-            setTimeout(() => feedback.remove(), 2000);
-        }
-
-        // Função para finalizar o pedido
-        function finalizarPedido() {
+        // Função para abrir o modal de finalização
+        function openDeliveryForm() {
             if(carrinho.length === 0) {
-                showFeedback('Seu carrinho está vazio!');
+                showToast('Seu carrinho está vazio!');
                 return;
             }
+            
+            document.getElementById('delivery-modal').classList.add('active');
+        }
 
-            const dados = {
-                nomeCompleto: document.getElementById('nome-completo').value,
-                telefone: document.getElementById('telefone').value,
-                cep: document.getElementById('cep').value,
-                numero: document.getElementById('numero').value,
-                pagamento: document.getElementById('pagamento').value
+        // Função para fechar modal
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        // Função para abrir quick view
+        function openQuickView(id, nome, preco, descricao, imagem) {
+            currentProduct = { id, nome, preco, descricao, imagem };
+            
+            document.getElementById('quick-view-name').textContent = nome;
+            document.getElementById('quick-view-price').textContent = `R$ ${preco.toFixed(2).replace('.', ',')`;
+            document.getElementById('quick-view-description').textContent = descricao;
+            document.getElementById('quick-view-image').src = imagem;
+            document.getElementById('quick-view-image').alt = nome;
+            
+            document.getElementById('quick-view-add-to-cart').onclick = () => {
+                addToCart(id, nome, preco);
+                closeModal('quick-view-modal');
             };
+            
+            document.getElementById('quick-view-modal').classList.add('active');
+        }
 
-            let mensagem = `*PEDIDO - Street Burger*%0A%0A`;
-            mensagem += `*DADOS DO CLIENTE*%0A`;
-            mensagem += `Nome: ${dados.nomeCompleto}%0A`;
-            mensagem += `Contato: ${dados.telefone}%0A`;
-            mensagem += `Endereço: CEP ${dados.cep} - Nº ${dados.numero}%0A%0A`;
-            mensagem += `*FORMA DE PAGAMENTO*%0A`;
-            mensagem += `${dados.pagamento}%0A%0A`;
-            mensagem += `*ITENS DO PEDIDO*%0A`;
+        // Função para mostrar toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
 
-            carrinho.forEach((item, index) => {
-                mensagem += `----------------------------%0A`;
-                mensagem += `Item ${index + 1}%0A`;
-                mensagem += `Nome: ${item.nome}%0A`;
-                mensagem += `Quantidade: ${item.quantidade}%0A`;
-                mensagem += `Valor: R$ ${(item.preco * item.quantidade).toFixed(2)}%0A`;
-            });
-
-            mensagem += `%0A----------------------------%0A`;
-            mensagem += `*SUBTOTAL: R$ ${document.getElementById('subtotal').textContent}*%0A`;
-            mensagem += `*TOTAL: R$ ${document.getElementById('total').textContent}*%0A%0A`;
-            mensagem += `Pedido pronto para confirmação!`;
-
-            const linkWhatsApp = `https://wa.me/5521980241228?text=${mensagem}`;
-            window.open(linkWhatsApp, '_blank');
+        // Função para finalizar pedido
+        function finalizarPedido(event) {
+            event.preventDefault();
+            
+            const submitBtn = document.getElementById('submit-order-btn');
+            submitBtn.innerHTML = '<span class="spinner"></span> Processando...';
+            submitBtn.disabled = true;
+            
+            // Simular processamento
+            setTimeout(() => {
+                const nome = document.getElementById('nome-completo').value;
+                const telefone = document.getElementById('telefone').value;
+                const endereco = document.getElementById('endereco').value;
+                const numero = document.getElementById('numero').value;
+                const complemento = document.getElementById('complemento').value;
+                const pagamento = document.getElementById('pagamento').value;
+                const observacoes = document.getElementById('observacoes').value;
+                
+                // Calcular totais
+                const subtotal = carrinho.reduce((total, item) => total + (item.preco * item.quantidade), 0);
+                const total = subtotal + DELIVERY_FEE;
+                
+                // Montar mensagem para WhatsApp
+                let mensagem = `*PEDIDO - STREET BURGER*%0A%0A`;
+                mensagem += `*DADOS DO CLIENTE*%0A`;
+                mensagem += `Nome: ${nome}%0A`;
+                mensagem += `Contato: ${telefone}%0A`;
+                mensagem += `Endereço: ${endereco}, ${numero}${complemento ? ' - ' + complemento : ''}%0A%0A`;
+                mensagem += `*FORMA DE PAGAMENTO*%0A`;
+                mensagem += `${pagamento}%0A%0A`;
+                mensagem += `*ITENS DO PEDIDO*%0A`;
+                
+                carrinho.forEach((item, index) => {
+                    mensagem += `----------------------------%0A`;
+                    mensagem += `Item ${index + 1}%0A`;
+                    mensagem += `Nome: ${item.nome}%0A`;
+                    mensagem += `Quantidade: ${item.quantidade}%0A`;
+                    mensagem += `Valor unitário: R$ ${item.preco.toFixed(2)}%0A`;
+                    mensagem += `Subtotal: R$ ${(item.preco * item.quantidade).toFixed(2)}%0A`;
+                });
+                
+                mensagem += `%0A----------------------------%0A`;
+                mensagem += `*SUBTOTAL: R$ ${subtotal.toFixed(2)}*%0A`;
+                mensagem += `*TAXA DE ENTREGA: R$ ${DELIVERY_FEE.toFixed(2)}*%0A`;
+                mensagem += `*TOTAL: R$ ${total.toFixed(2)}*%0A%0A`;
+                
+                if(observacoes) {
+                    mensagem += `*OBSERVAÇÕES*%0A`;
+                    mensagem += `${observacoes}%0A%0A`;
+                }
+                
+                mensagem += `Pedido pronto para confirmação!`;
+                
+                // Enviar para WhatsApp
+                const whatsappLink = `https://wa.me/5521980241228?text=${mensagem}`;
+                window.open(whatsappLink, '_blank');
+                
+                // Limpar carrinho
+                carrinho = [];
+                salvarCarrinho();
+                atualizarCarrinho();
+                
+                // Fechar modal e resetar form
+                closeModal('delivery-modal');
+                event.target.reset();
+                
+                // Mostrar mensagem de sucesso
+                showToast('Pedido enviado com sucesso!');
+                
+                // Resetar botão
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Pedido';
+                submitBtn.disabled = false;
+            }, 1500);
         }
     </script>
 </body>
